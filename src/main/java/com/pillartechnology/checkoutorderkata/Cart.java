@@ -25,6 +25,10 @@ public class Cart {
 		return items.get(index);
 	}
 
+	public List<Item> getItems() {
+		return items;
+	}
+
 	
 
 	

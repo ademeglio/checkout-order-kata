@@ -30,4 +30,15 @@ public class TestCart {
 		assertEquals(cart.isEmpty(), false);
 	}
 	
+	@Test
+	public void shouldBeAbleToAddMoreThanOneItem() {
+		Item item2 = new Item();
+		
+		cart.addItem(item);
+		cart.addItem(item2);
+		
+		assertEquals(cart.getItems().size(), 2);
+		
+	}
+	
 } // End TestCart()
