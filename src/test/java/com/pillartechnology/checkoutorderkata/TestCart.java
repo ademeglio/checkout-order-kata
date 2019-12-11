@@ -9,7 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class TestCart {
 	
 	Cart cart = new Cart();
-	Item item = new Item();
+	Item item1 = new Item();
+	Item item2 = new Item();
 	
 	@Test
 	public void shouldStartEmpty() {
@@ -18,23 +19,22 @@ public class TestCart {
 	
 	@Test
 	public void shouldBeAbleToAddAnItem() {
-		cart.addItem(item);
+		cart.addItem(item1);
 		
-		assertEquals(cart.getItem(item), item);
+		assertEquals(cart.getItem(item1), item1);
 	}
 	
 	@Test
 	public void shouldNotBeEmptyAfterAddingItem() {
-		cart.addItem(item);
+		cart.addItem(item1);
 		
 		assertEquals(cart.isEmpty(), false);
 	}
 	
 	@Test
 	public void shouldBeAbleToAddMoreThanOneItem() {
-		Item item2 = new Item();
 		
-		cart.addItem(item);
+		cart.addItem(item1);
 		cart.addItem(item2);
 		
 		assertEquals(cart.getItems().size(), 2);
@@ -42,9 +42,8 @@ public class TestCart {
 	
 	@Test
 	public void shouldBeAbleToDeleteLastAddedItem() {
-		Item item2 = new Item();
 		
-		cart.addItem(item);
+		cart.addItem(item1);
 		cart.addItem(item2);
 		
 		cart.deleteLastItem();
