@@ -48,6 +48,11 @@ public class Cart {
 		Item item = items.get(items.size() - 1);
 		preTaxTotal = preTaxTotal.subtract(item.getPrice());
 		items.remove(items.size() - 1);
+	}
+
+	public void adjustPreTaxTotal(String priceAdjustment) {
+		BigDecimal priceAdjustmentAmount = new BigDecimal(priceAdjustment);
+		preTaxTotal = preTaxTotal.add(priceAdjustmentAmount);
 	}	
 
 	

@@ -75,4 +75,24 @@ public class TestCart {
 		assertEquals("1.99", cart.getPreTaxTotal());
 	}
 	
+	@Test
+	public void shouldMakeNegativeAdjustmentToPreTaxTotalByOne() {
+		cart.addItem(item1); // Unit price of $1.99
+		cart.addItem(item2); // Unit price of $1.99
+		
+		cart.adjustPreTaxTotal("-1.00");
+		
+		assertEquals("2.98", cart.getPreTaxTotal());
+	}
+	
+	@Test
+	public void shouldMakePositiveAdjustmentToPreTaxTotalByOne() {
+		cart.addItem(item1); // Unit price of $1.99
+		cart.addItem(item2); // Unit price of $1.99
+		
+		cart.adjustPreTaxTotal("1.00");
+		
+		assertEquals("4.98", cart.getPreTaxTotal());
+	}
+	
 } // End TestCart()
