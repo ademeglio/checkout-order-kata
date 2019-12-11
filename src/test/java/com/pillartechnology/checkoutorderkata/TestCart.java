@@ -24,6 +24,12 @@ public class TestCart {
 		assertEquals(cart.getItem(item), item);
 	}
 	
-	
+	@Test
+	public void shouldNotBeEmptyAfterAddingItem() {
+		Item item = new Item();
+		cart.addItem(item);
+		
+		assertEquals(cart.isEmpty(), false);
+	}
 	
 } // End TestCart()

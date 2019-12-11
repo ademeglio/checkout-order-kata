@@ -5,15 +5,19 @@ import java.util.List;
 
 public class Cart {
 
+	private boolean isEmpty = true;
 	private List<Item> items = new ArrayList<Item>();
 
+	
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return true;
+		return isEmpty;
 	}
 
 	public void addItem(Item item) {
 		items.add(item);
+		if (isEmpty) {
+			this.isEmpty = false;
+		}
 	}
 	
 	public Item getItem(Item item) {
