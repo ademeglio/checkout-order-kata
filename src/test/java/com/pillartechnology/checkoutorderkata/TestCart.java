@@ -52,8 +52,17 @@ public class TestCart {
 		assertEquals(false, cart.getItems().contains(item2));
 	}
 	
-	@Test void shouldReturnPreTaxTotalAsZeroWhenEmpty() {
+	@Test 
+	public void shouldReturnPreTaxTotalAsZeroWhenEmpty() {
 		assertEquals("0.00", cart.getPreTaxTotal());
+	}
+	
+	@Test
+	public void shouldReturnPositivePreTaxTotalAfterAddingItems() {
+		cart.addItem(item1); // Unit price of $1.99
+		cart.addItem(item2); // Unit price of $1.99
+		
+		assertEquals("3.98", cart.getPreTaxTotal());
 	}
 	
 } // End TestCart()

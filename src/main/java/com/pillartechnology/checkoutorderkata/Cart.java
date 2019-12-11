@@ -33,6 +33,7 @@ public class Cart {
 	
 	public void addItem(Item item) {
 		items.add(item);
+		preTaxTotal = preTaxTotal.add(item.getPrice());
 		if (isEmpty) {
 			this.isEmpty = false;
 		}
