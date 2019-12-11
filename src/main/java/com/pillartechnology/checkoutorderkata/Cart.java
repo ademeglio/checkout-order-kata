@@ -29,6 +29,10 @@ public class Cart {
 		return items;
 	}
 
+	public void deleteLastItem() {
+		items.remove(items.size() - 1);
+	}
+
 	
 
 	

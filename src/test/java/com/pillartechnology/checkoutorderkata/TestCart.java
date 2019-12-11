@@ -38,7 +38,19 @@ public class TestCart {
 		cart.addItem(item2);
 		
 		assertEquals(cart.getItems().size(), 2);
+	}
+	
+	@Test
+	public void shouldBeAbleToDeleteLastAddedItem() {
+		Item item2 = new Item();
 		
+		cart.addItem(item);
+		cart.addItem(item2);
+		
+		cart.deleteLastItem();
+		
+		assertEquals(cart.getItems().size(), 1);
+		assertEquals(cart.getItems().contains(item2), false);
 	}
 	
 } // End TestCart()
