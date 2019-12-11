@@ -27,3 +27,11 @@ _TODO ADD INSTRUCTIONS BEFORE_
 1. Support a limit on specials, for example, "buy 2 get 1 free, limit 6" would prevent getting a third free item.
 1. Support removing a scanned item, keeping the total correct after possibly invalidating a special.
 1. Support "Buy N, get M of equal or lesser value for %X off" on weighted items. For example, "Buy 2 pounds of ground beef, get 1 pound half off."
+
+## Notes
+
+1. Scan Item
+    1. If this isPriceByWeight then query the user for the weight of the object.
+    1. Check if the cart contains this item and determine a count of the item type.
+    1. Adjust price if it has a markdown (Markdown list?)
+    1. Adjust price if it is on special.
