@@ -14,21 +14,21 @@ public class TestCart {
 	
 	@Test
 	public void shouldStartEmpty() {
-		assertEquals(cart.isEmpty(), true);
+		assertEquals(true, cart.isEmpty());
 	}
 	
 	@Test
 	public void shouldBeAbleToAddAnItem() {
 		cart.addItem(item1);
 		
-		assertEquals(cart.getItem(item1), item1);
+		assertEquals(item1, cart.getItem(item1));
 	}
 	
 	@Test
 	public void shouldNotBeEmptyAfterAddingItem() {
 		cart.addItem(item1);
 		
-		assertEquals(cart.isEmpty(), false);
+		assertEquals(false, cart.isEmpty());
 	}
 	
 	@Test
@@ -37,7 +37,7 @@ public class TestCart {
 		cart.addItem(item1);
 		cart.addItem(item2);
 		
-		assertEquals(cart.getItems().size(), 2);
+		assertEquals(2, cart.getItems().size());
 	}
 	
 	@Test
@@ -48,8 +48,12 @@ public class TestCart {
 		
 		cart.deleteLastItem();
 		
-		assertEquals(cart.getItems().size(), 1);
-		assertEquals(cart.getItems().contains(item2), false);
+		assertEquals(1, cart.getItems().size());
+		assertEquals(false, cart.getItems().contains(item2));
+	}
+	
+	@Test void shouldReturnPreTaxTotalAsZeroWhenEmpty() {
+		assertEquals(0.00, cart.getPreTaxTotal());
 	}
 	
 } // End TestCart()

@@ -1,5 +1,6 @@
 package com.pillartechnology.checkoutorderkata;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,11 @@ public class Cart {
 
 	public void deleteLastItem() {
 		items.remove(items.size() - 1);
+	}
+
+	public BigDecimal getPreTaxTotal() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
