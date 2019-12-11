@@ -45,6 +45,8 @@ public class Cart {
 	}
 
 	public void deleteLastItem() {
+		Item item = items.get(items.size() - 1);
+		preTaxTotal = preTaxTotal.subtract(item.getPrice());
 		items.remove(items.size() - 1);
 	}	
 

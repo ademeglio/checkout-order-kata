@@ -65,4 +65,14 @@ public class TestCart {
 		assertEquals("3.98", cart.getPreTaxTotal());
 	}
 	
+	@Test
+	public void shouldSubtractFromPreTaxTotalAfterDeletingLastItem() {
+		cart.addItem(item1); // Unit price of $1.99
+		cart.addItem(item2); // Unit price of $1.99
+		
+		cart.deleteLastItem();
+		
+		assertEquals("1.99", cart.getPreTaxTotal());
+	}
+	
 } // End TestCart()
