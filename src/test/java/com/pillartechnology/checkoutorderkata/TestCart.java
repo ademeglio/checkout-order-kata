@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class TestCart {
 	
 	Cart cart = new Cart();
+	Item item = new Item();
 	
 	@Test
 	public void shouldStartEmpty() {
@@ -17,8 +18,6 @@ public class TestCart {
 	
 	@Test
 	public void shouldBeAbleToAddAnItem() {
-		Item item = new Item();
-		
 		cart.addItem(item);
 		
 		assertEquals(cart.getItem(item), item);
@@ -26,7 +25,6 @@ public class TestCart {
 	
 	@Test
 	public void shouldNotBeEmptyAfterAddingItem() {
-		Item item = new Item();
 		cart.addItem(item);
 		
 		assertEquals(cart.isEmpty(), false);
