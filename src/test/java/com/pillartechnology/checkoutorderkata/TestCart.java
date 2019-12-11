@@ -53,7 +53,7 @@ public class TestCart {
 	}
 	
 	@Test void shouldReturnPreTaxTotalAsZeroWhenEmpty() {
-		assertEquals(0.00, cart.getPreTaxTotal());
+		assertEquals("0.00", cart.getPreTaxTotal());
 	}
 	
 } // End TestCart()
