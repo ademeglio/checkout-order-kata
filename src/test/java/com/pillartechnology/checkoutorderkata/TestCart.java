@@ -67,7 +67,7 @@ public class TestCart {
 	}
 	
 	@Test
-	public void shouldReturnPositivePreTaxTotalAfterAddingItems() {
+	public void shouldReturnPositivePreTaxTotalAfterAddingUnitItems() {
 		cart.addItem(item1); // Unit price of $1.99
 		cart.addItem(item2); // Unit price of $1.99
 		
@@ -75,7 +75,7 @@ public class TestCart {
 	}
 	
 	@Test
-	public void shouldSubtractFromPreTaxTotalAfterDeletingLastItem() {
+	public void shouldSubtractFromPreTaxTotalAfterDeletingLastUnitItem() {
 		cart.addItem(item1); // Unit price of $1.99
 		cart.addItem(item2); // Unit price of $1.99
 		
