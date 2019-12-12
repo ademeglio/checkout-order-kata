@@ -40,5 +40,13 @@ public class TestItem {
 		assertEquals(false, item1.hasMarkdown());
 	}
 	
+	@Test
+	public void shouldUpdatePriceIfMarkdownIsAdded() {
+		item1.setPrice("1.99");
+		item1.addMarkdownAmount("1.00");
+		
+		assertEquals("0.99", item1.getPrice().toString());
+	}
+	
 	
 } // End TestItem()

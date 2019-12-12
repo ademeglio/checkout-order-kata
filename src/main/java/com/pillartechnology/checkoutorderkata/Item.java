@@ -45,7 +45,10 @@ public class Item {
 
 	// Methods
 	
-	
+	public void addMarkdownAmount(String markdownAmount) {
+		BigDecimal markDown = new BigDecimal(markdownAmount);
+		price = price.subtract(markDown);
+	}	
 
 
 
