@@ -15,5 +15,14 @@ public class TestItem {
 		assertEquals("Soup", item1.getName());
 	}
 	
+	@Test
+	public void shouldIdentifyIsChargedByWeightTrueIfSetToTrue() {
+		Item item1 = new Item("Bananas");
+		
+		item1.setChargeByWeight(true);
+		
+		assertEquals(true, item1.isChargeByWeight());
+	}
+	
 	
 } // End TestItem()
