@@ -63,4 +63,6 @@ public class TestItem {
 		assertEquals(false, item1.hasSpecial());
 	}
 	
+	// How do we deal with specials!?
+	
 } // End TestItem()
