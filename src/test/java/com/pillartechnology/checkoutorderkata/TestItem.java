@@ -16,12 +16,19 @@ public class TestItem {
 	}
 	
 	@Test
+	public void shouldIdentifyIsChargedByWeightIsFalseIfNotSet() {
+		Item item1 = new Item("Soup");
+		
+		assertEquals(false, item1.isChargeByWeight());
+	}
+	
+	@Test
 	public void shouldIdentifyIsChargedByWeightTrueIfSetToTrue() {
-		Item item1 = new Item("Bananas");
+		Item item2 = new Item("Bananas");
 		
-		item1.setChargeByWeight(true);
+		item2.setChargeByWeight(true);
 		
-		assertEquals(true, item1.isChargeByWeight());
+		assertEquals(true, item2.isChargeByWeight());
 	}
 	
 	
