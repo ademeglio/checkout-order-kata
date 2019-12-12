@@ -6,6 +6,7 @@ public class Item {
 
 	private String name;
 	private boolean isChargeByWeight;
+	private BigDecimal price;
 
 	// Constructor
 	public Item(String itemName) {
@@ -20,8 +21,11 @@ public class Item {
 	}
 	
 	public BigDecimal getPrice() {
-		BigDecimal price = new BigDecimal("1.99");
 		return price;
+	}
+	
+	public void setPrice(String priceAsString) {
+		this.price = new BigDecimal(priceAsString);
 	}
 
 	public boolean isChargeByWeight() {
@@ -31,6 +35,14 @@ public class Item {
 	public void setChargeByWeight(boolean isChargeByWeight) {
 		this.isChargeByWeight = isChargeByWeight;	
 	}
+
+
+	// Methods
+	
+	
+
+
+
 
 
 
