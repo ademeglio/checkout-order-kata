@@ -8,6 +8,7 @@ public class Item {
 	private boolean isChargeByWeight;
 	private BigDecimal price;
 	private boolean hasMarkdown;
+	private boolean hasSpecial;
 
 	// Constructor
 	public Item(String itemName) {
@@ -42,14 +43,20 @@ public class Item {
 		return hasMarkdown;
 	}
 
+	public boolean hasSpecial() {
+		return hasSpecial;
+	}	
 
+	
 	// Methods
 	
 	public void addMarkdownAmount(String markdownAmount) {
 		BigDecimal markDown = new BigDecimal(markdownAmount);
 		price = price.subtract(markDown);
 		hasMarkdown = true;
-	}	
+	}
+
+
 
 
 

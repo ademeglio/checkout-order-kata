@@ -58,5 +58,9 @@ public class TestItem {
 		assertEquals(true, item1.hasMarkdown());
 	}
 	
+	@Test
+	public void shouldIdentifyHasSpecialFalseIfNotSet() {
+		assertEquals(false, item1.hasSpecial());
+	}
 	
 } // End TestItem()
