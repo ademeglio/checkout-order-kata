@@ -9,8 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class TestCart {
 	
 	Cart cart = new Cart();
-	Item item1 = new Item();
-	Item item2 = new Item();
+	Item item1 = new Item("Soup");
+	Item item2 = new Item("Bread");
 	
 	@Test
 	public void shouldStartEmpty() {
