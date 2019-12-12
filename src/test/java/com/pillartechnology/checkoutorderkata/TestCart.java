@@ -2,6 +2,7 @@ package com.pillartechnology.checkoutorderkata;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -11,6 +12,14 @@ public class TestCart {
 	Cart cart = new Cart();
 	Item item1 = new Item("Soup");
 	Item item2 = new Item("Bread");
+	
+	@BeforeEach
+	public void setup() {
+		item1.setPrice("1.99");
+		item2.setPrice("1.99");
+	}
+	
+	/* TESTS */
 	
 	@Test
 	public void shouldStartEmpty() {
