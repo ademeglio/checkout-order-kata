@@ -35,5 +35,10 @@ public class TestItem {
 		assertEquals("2.99", item1.getPrice().toString());
 	}
 	
+	@Test
+	public void shouldIdentifyHasMarkdownFalseIfNotSet() {
+		assertEquals(false, item1.hasMarkdown());
+	}
+	
 	
 } // End TestItem()

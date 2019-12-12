@@ -7,6 +7,7 @@ public class Item {
 	private String name;
 	private boolean isChargeByWeight;
 	private BigDecimal price;
+	private boolean hasMarkdown;
 
 	// Constructor
 	public Item(String itemName) {
@@ -34,6 +35,11 @@ public class Item {
 
 	public void setChargeByWeight(boolean isChargeByWeight) {
 		this.isChargeByWeight = isChargeByWeight;	
+	}
+
+
+	public boolean hasMarkdown() {
+		return hasMarkdown;
 	}
 
 
