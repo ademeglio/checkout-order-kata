@@ -6,7 +6,7 @@ Hello and thank you for reviewing my kata exercise.
 
 I have used Gradle to configure running the tests. [Reference](https://docs.gradle.org/current/userguide/java_testing.html)
 
-_TODO ADD INSTRUCTIONS BEFORE_
+_TODO ADD INSTRUCTIONS BEFORE SENDING IN FOR REVIEW_
 
 ## Requirements
 
@@ -31,7 +31,7 @@ _TODO ADD INSTRUCTIONS BEFORE_
 ## Notes
 
 1. Scan Item
-    1. If this isPriceByWeight then query the user for the weight of the object.
+    1. If this isPriceByWeight then query the user for the weight of the object immediately after that.
     1. Check if the cart contains this item and determine a count of the item type.
-    1. Adjust price if it has a markdown (Markdown list?)
-    1. Adjust price if it is on special.
+    1. Adjust price if it has a markdown (hasMarkdown)
+    1. Adjust price if it is on special. (hasSpecial)
