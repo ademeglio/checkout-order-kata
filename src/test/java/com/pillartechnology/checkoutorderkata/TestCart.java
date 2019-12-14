@@ -36,7 +36,8 @@ public class TestCart {
 	
 	@Test
 	public void shouldNotBeEmptyAfterAddingItem() {
-		cart.addItem(item1);
+		CartItem cartItem1 = new CartItem(item1);
+		cart.addCartItem(cartItem1);
 		
 		assertEquals(false, cart.isEmpty());
 	}
