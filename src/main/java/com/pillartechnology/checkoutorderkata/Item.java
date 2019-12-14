@@ -58,6 +58,12 @@ public class Item {
 	public void addMarkdown(Markdown markdown) {
 		this.hasMarkdown = true;
 		this.markdown = markdown;
+	}
+
+
+	public void addSpecial(Special special1) {
+		this.hasSpecial = true;
+		
 	}	
 	
 

@@ -82,6 +82,13 @@ public class TestItem {
 		assertEquals(false, item1.hasSpecial());
 	}
 	
-	// How do we deal with specials!?
+	@Test
+	public void shouldUpdateAsHavingSpecialIfAdded() {
+		Special special1 = new Special();
+		
+		item1.addSpecial(special1);
+		
+		assertEquals(true, item1.hasSpecial());
+	}
 	
 } // End TestItem()
