@@ -27,10 +27,11 @@ public class TestCart {
 	}
 	
 	@Test
-	public void shouldBeAbleToAddAnItem() {
-		cart.addItem(item1);
+	public void shouldBeAbleToAddACartItem() {
+		CartItem cartItem1 = new CartItem(item1);
+		cart.addCartItem(cartItem1);
 		
-		assertEquals(item1, cart.getItem(item1));
+		assertEquals(cartItem1, cart.getCartItem(cartItem1));
 	}
 	
 	@Test
