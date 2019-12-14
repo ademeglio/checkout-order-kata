@@ -16,4 +16,16 @@ public class TestInventory {
 		
 		assertEquals(true, inventory.isEmpty());
 	}
+	
+	@Test
+	public void shouldBeAbleToAddAnItem() {
+		Item item1 = new Item("Soup");
+		Inventory inventory = new Inventory();
+		
+		inventory.addItem(item1);
+		
+		assertEquals(true, inventory.getItems().contains(item1));
+	}
+	
+	
 } // End TestInventory()
