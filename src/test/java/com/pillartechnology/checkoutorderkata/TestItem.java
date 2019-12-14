@@ -91,4 +91,13 @@ public class TestItem {
 		assertEquals(true, item1.hasSpecial());
 	}
 	
+	@Test
+	public void canIdentifySpecialAfterSpecialIsAdded() {
+		Special special1 = new Special();
+		
+		item1.addSpecial(special1);
+		
+		assertEquals(special1, item1.getSpecial());
+	}
+	
 } // End TestItem()

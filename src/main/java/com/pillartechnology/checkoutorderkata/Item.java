@@ -10,6 +10,7 @@ public class Item {
 	private boolean hasMarkdown;
 	private boolean hasSpecial;
 	private Markdown markdown;
+	private Special special;
 
 	// Constructor
 	public Item(String itemName) {
@@ -51,6 +52,10 @@ public class Item {
 	public Markdown getMarkdown() {
 		return markdown;
 	}
+	
+	public Special getSpecial() {
+		return special;
+	}	
 
 	
 	// Methods
@@ -63,8 +68,8 @@ public class Item {
 
 	public void addSpecial(Special special1) {
 		this.hasSpecial = true;
-		
-	}	
-	
+		this.special = special1;
+	}
+
 
 } // End Item()
