@@ -12,14 +12,20 @@ public class Item {
 	private boolean hasSpecial;
 	private Special special;
 
-	// Constructor
+	// Constructors
 	public Item(String itemName) {
 		this.name = itemName;
+	}
+	
+	public Item(String itemName, String price) {
+		this.name = itemName;
+		this.price = new BigDecimal(price);
+		
 	}
 
 	
 	// Getters & Setters
-	
+
 	public String getName() {
 		return name;
 	}

@@ -1,5 +1,6 @@
 package com.pillartechnology.checkoutorderkata;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -83,6 +84,16 @@ public class TestItem {
 		item1.addSpecial(special1);
 		
 		assertEquals(special1, item1.getSpecial());
+	}
+	
+	@Test
+	public void canInstantiateItemWithNameAndPrice() {
+		Item item3 = new Item("Sauce", "3.99");
+				
+		assertAll("item3",
+			() -> assertEquals("Sauce", item3.getName()),
+			() -> assertEquals("3.99", item3.getPrice().toString())
+		);
 	}
 	
 } // End TestItem()
