@@ -45,26 +45,14 @@ public class Item {
 
 	public boolean hasSpecial() {
 		return hasSpecial;
-	}	
+	}
 
 	
 	// Methods
-	
-	public void addMarkdownAmount(String markdownAmount) {
-		BigDecimal markDown = new BigDecimal(markdownAmount);
-		price = price.subtract(markDown);
-		hasMarkdown = true;
-	}
 
-
-
-
-
-
-
-
-
-
+	public void addMarkdown(Markdown markdown) {
+		this.hasMarkdown = true;
+	}	
 	
 
 } // End Item()
