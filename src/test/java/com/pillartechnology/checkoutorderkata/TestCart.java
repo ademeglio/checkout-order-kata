@@ -35,7 +35,7 @@ public class TestCart {
 	}
 	
 	@Test
-	public void shouldNotBeEmptyAfterAddingItem() {
+	public void shouldNotBeEmptyAfterAddingCartItem() {
 		CartItem cartItem1 = new CartItem(item1);
 		cart.addCartItem(cartItem1);
 		
