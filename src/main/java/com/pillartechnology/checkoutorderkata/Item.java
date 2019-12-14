@@ -8,8 +8,8 @@ public class Item {
 	private boolean isChargeByWeight;
 	private BigDecimal price;
 	private boolean hasMarkdown;
-	private boolean hasSpecial;
 	private Markdown markdown;
+	private boolean hasSpecial;
 	private Special special;
 
 	// Constructor
@@ -40,17 +40,16 @@ public class Item {
 		this.isChargeByWeight = isChargeByWeight;	
 	}
 
-
 	public boolean hasMarkdown() {
 		return hasMarkdown;
 	}
 
-	public boolean hasSpecial() {
-		return hasSpecial;
-	}
-	
 	public Markdown getMarkdown() {
 		return markdown;
+	}
+	
+	public boolean hasSpecial() {
+		return hasSpecial;
 	}
 	
 	public Special getSpecial() {

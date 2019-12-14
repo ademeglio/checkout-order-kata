@@ -43,21 +43,6 @@ public class TestItem {
 	public void shouldIdentifyHasMarkdownFalseIfNotSet() {
 		assertEquals(false, item1.hasMarkdown());
 	}
-
-/* CHANGED IMPLEMENTATION OF MARKDOWN */
-//	@Test
-//	public void shouldUpdatePriceIfMarkdownIsAdded() {
-//		item1.addMarkdownAmount("1.00");
-//		
-//		assertEquals("0.99", item1.getPrice().toString());
-//	}
-//	
-//	@Test
-//	public void shouldIdentifyHasMarkdownTrueIfMarkdownAdded() {
-//		item1.addMarkdownAmount("1.00");
-//		
-//		assertEquals(true, item1.hasMarkdown());
-//	}
 	
 	@Test
 	public void shouldUpdateAsHavingMarkdownIfAdded() {
