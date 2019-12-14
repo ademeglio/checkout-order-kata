@@ -69,6 +69,15 @@ public class TestItem {
 	}
 	
 	@Test
+	public void canIdentifyMarkdownAmountWhenMarkdownIsAdded() {
+		Markdown markdownBy1Dollar = new Markdown("1.00");
+		
+		item1.addMarkdown(markdownBy1Dollar);
+		
+		assertEquals(markdownBy1Dollar, item1.getMarkdown());
+	}
+	
+	@Test
 	public void shouldIdentifyHasSpecialFalseIfNotSet() {
 		assertEquals(false, item1.hasSpecial());
 	}

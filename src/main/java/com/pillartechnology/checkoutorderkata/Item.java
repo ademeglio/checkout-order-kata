@@ -9,6 +9,7 @@ public class Item {
 	private BigDecimal price;
 	private boolean hasMarkdown;
 	private boolean hasSpecial;
+	private Markdown markdown;
 
 	// Constructor
 	public Item(String itemName) {
@@ -46,12 +47,17 @@ public class Item {
 	public boolean hasSpecial() {
 		return hasSpecial;
 	}
+	
+	public Markdown getMarkdown() {
+		return markdown;
+	}
 
 	
 	// Methods
 
 	public void addMarkdown(Markdown markdown) {
 		this.hasMarkdown = true;
+		this.markdown = markdown;
 	}	
 	
 
