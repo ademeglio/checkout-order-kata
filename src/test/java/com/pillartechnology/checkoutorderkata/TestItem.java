@@ -69,7 +69,7 @@ public class TestItem {
 	}
 	
 	@Test
-	public void canIdentifyMarkdownAmountWhenMarkdownIsAdded() {
+	public void canIdentifyMarkdownAfterMarkdownIsAdded() {
 		Markdown markdownBy1Dollar = new Markdown("1.00");
 		
 		item1.addMarkdown(markdownBy1Dollar);
