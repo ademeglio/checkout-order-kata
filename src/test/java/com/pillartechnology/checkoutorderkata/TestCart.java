@@ -55,14 +55,16 @@ public class TestCart {
 	
 	@Test
 	public void shouldBeAbleToDeleteLastAddedItem() {
+		CartItem cartItem1 = new CartItem(item1);
+		CartItem cartItem2 = new CartItem(item2);
 		
-		cart.addItem(item1);
-		cart.addItem(item2);
+		cart.addCartItem(cartItem1);
+		cart.addCartItem(cartItem2);
 		
-		cart.deleteLastItem();
+		cart.deleteLastCartItem();
 		
-		assertEquals(1, cart.getItems().size());
-		assertEquals(false, cart.getItems().contains(item2));
+		assertEquals(1, cart.getCartItems().size());
+		assertEquals(false, cart.getCartItems().contains(item2));
 	}
 	
 	@Test 
