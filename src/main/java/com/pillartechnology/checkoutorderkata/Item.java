@@ -20,7 +20,13 @@ public class Item {
 	public Item(String itemName, String price) {
 		this.name = itemName;
 		this.price = new BigDecimal(price);
-		
+	}
+	
+
+	public Item(String itemName, String price, boolean isChargeByWeight) {
+		this.name = itemName;
+		this.price = new BigDecimal(price);
+		this.isChargeByWeight = isChargeByWeight;
 	}
 
 	

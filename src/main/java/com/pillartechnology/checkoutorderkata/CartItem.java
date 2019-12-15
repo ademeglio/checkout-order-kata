@@ -8,7 +8,7 @@ public class CartItem extends Item {
 
 	// Constructor
 	public CartItem(Item item) {
-		super(item.getName(), item.getPrice().toString());
+		super(item.getName(), item.getPrice().toString(), item.isChargeByWeight());
 		super.addMarkdown(item.getMarkdown());
 		this.salePrice = setSalePrice();
 	}

@@ -2,6 +2,9 @@ package com.pillartechnology.checkoutorderkata;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -35,6 +38,16 @@ public class TestCartItem {
 		
 		CartItem cartItem1 = new CartItem(item1);
 		assertEquals("0.99", cartItem1.getSalePrice().toString());	
+	}
+	
+	@Test
+	public void shouldReturnTrueIfCartItemChargesByWeightIsSetTrue() {
+
+		Item item1 = new Item("Apples", "1.89", true);
+		
+		CartItem cartItem = new CartItem(item1);
+		
+		assertEquals(true, cartItem.isChargeByWeight());
 	}
 	
 	
