@@ -13,10 +13,16 @@ public class TestCart {
 	Item item1 = new Item("Soup");
 	Item item2 = new Item("Bread");
 	
+	CartItem cartItem1;
+	CartItem cartItem2;
+	
 	@BeforeEach
 	public void setup() {
 		item1.setPrice("1.99");
 		item2.setPrice("1.99");
+		
+		cartItem1 = new CartItem(item1);
+		cartItem2 = new CartItem(item2);
 	}
 	
 	/* TESTS */
@@ -74,8 +80,6 @@ public class TestCart {
 	
 	@Test
 	public void shouldReturnPositivePreTaxTotalAfterCalculatingAddedUnitTypeCartItems() {
-		CartItem cartItem1 = new CartItem(item1);
-		CartItem cartItem2 = new CartItem(item2);
 		
 		cart.addCartItem(cartItem1); // Unit price of $1.99
 		cart.addCartItem(cartItem2); // Unit price of $1.99
@@ -95,24 +99,5 @@ public class TestCart {
 //		assertEquals("1.99", cart.getPreTaxTotal());
 //	}
 	
-//	@Test
-//	public void shouldMakeNegativeAdjustmentToPreTaxTotalByOne() {
-//		cart.addItem(item1); // Unit price of $1.99
-//		cart.addItem(item2); // Unit price of $1.99
-//		
-//		cart.adjustPreTaxTotal("-1.00");
-//		
-//		assertEquals("2.98", cart.getPreTaxTotal());
-//	}
-	
-//	@Test
-//	public void shouldMakePositiveAdjustmentToPreTaxTotalByOne() {
-//		cart.addItem(item1); // Unit price of $1.99
-//		cart.addItem(item2); // Unit price of $1.99
-//		
-//		cart.adjustPreTaxTotal("1.00");
-//		
-//		assertEquals("4.98", cart.getPreTaxTotal());
-//	}
 	
 } // End TestCart()
