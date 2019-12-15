@@ -117,4 +117,19 @@ public class TestCart {
 		);
 	}
 	
+	@Test
+	public void shouldReturnCorrectPreTaxTotalIfACartItemHasMarkdown() {
+		Item item3 = new Item("Chips", "1.99");
+		Markdown markdown = new Markdown("$1.00 OFF", "1.00");
+		item3.addMarkdown(markdown);
+		CartItem cartItem3 = new CartItem(item3);
+		
+		cart.addCartItem(cartItem1); // Unit price of $1.99
+		cart.addCartItem(cartItem3); // Sale Price of 0.99
+		cart.calculatePreTaxTotal();
+		
+		assertEquals("2.98", cart.getPreTaxTotal());
+		
+	}
+	
 } // End TestCart()

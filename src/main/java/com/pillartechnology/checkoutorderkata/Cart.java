@@ -51,7 +51,7 @@ public class Cart {
 		preTaxTotal = new BigDecimal("0.00");
 		
 		for (CartItem cartItem : cartItems) {
-			preTaxTotal = preTaxTotal.add(cartItem.getPrice());
+			preTaxTotal = preTaxTotal.add(cartItem.getSalePrice());
 		}
 	}
 
