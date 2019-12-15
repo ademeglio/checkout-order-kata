@@ -53,6 +53,10 @@ public class Cart {
 		for (CartItem cartItem : cartItems) {
 			preTaxTotal = preTaxTotal.add(cartItem.getPrice());
 		}
+	}
+
+	public void deleteCartItem(CartItem cartItem1) {
+		cartItems.remove(cartItem1);
 	}	
 
 	

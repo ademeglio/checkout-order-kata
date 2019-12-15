@@ -99,17 +99,22 @@ public class TestCart {
 		cart.calculatePreTaxTotal();
 		
 		assertEquals("1.99", cart.getPreTaxTotal());
-		
 	}
-//	@Test
-//	public void shouldSubtractFromPreTaxTotalAfterDeletingLastUnitItem() {
-//		cart.addItem(item1); // Unit price of $1.99
-//		cart.addItem(item2); // Unit price of $1.99
-//		
-//		cart.deleteLastItem();
-//		
-//		assertEquals("1.99", cart.getPreTaxTotal());
-//	}
-	
+
+	@Test
+	public void shouldDeleteRescannedCartItemAndDisplayCorrectPreTaxTotal() {
+		cart.addCartItem(cartItem1); // Unit price of $1.99
+		cart.addCartItem(cartItem1); // Unit price of $1.99
+		cart.addCartItem(cartItem2); // Unit price of $1.99
+		cart.calculatePreTaxTotal();
+		
+		cart.deleteCartItem(cartItem1);
+		cart.calculatePreTaxTotal();
+		
+		assertAll("cart",
+			() -> assertEquals(2, cart.getCartItems().size()),
+			() -> assertEquals("3.98", cart.getPreTaxTotal())
+		);
+	}
 	
 } // End TestCart()
