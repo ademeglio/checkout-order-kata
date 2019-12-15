@@ -43,12 +43,14 @@ public class TestCart {
 	}
 	
 	@Test
-	public void shouldBeAbleToAddMoreThanOneItem() {
+	public void shouldBeAbleToAddMoreThanOneCartItem() {
+		CartItem cartItem1 = new CartItem(item1);
+		CartItem cartItem2 = new CartItem(item2);
 		
-		cart.addItem(item1);
-		cart.addItem(item2);
+		cart.addCartItem(cartItem1);
+		cart.addCartItem(cartItem2);
 		
-		assertEquals(2, cart.getItems().size());
+		assertEquals(2, cart.getCartItems().size());
 	}
 	
 	@Test

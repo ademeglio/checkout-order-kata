@@ -7,7 +7,7 @@ import java.util.List;
 public class Cart {
 
 	private boolean isEmpty = true;
-	private List<CartItem> items = new ArrayList<CartItem>();
+	private List<CartItem> cartItems = new ArrayList<CartItem>();
 	private BigDecimal preTaxTotal = new BigDecimal("0.00");
 
 	// Constructor
@@ -20,8 +20,8 @@ public class Cart {
 		return isEmpty;
 	}
 	
-	public List<CartItem> getItems() {
-		return items;
+	public List<CartItem> getCartItems() {
+		return cartItems;
 	}
 	
 	public String getPreTaxTotal() {
@@ -32,7 +32,7 @@ public class Cart {
 	// Methods
 	
 	public void addCartItem(CartItem cartItem) {
-		items.add(cartItem);
+		cartItems.add(cartItem);
 //		preTaxTotal = preTaxTotal.add(item.getPrice());
 		if (isEmpty) {
 			this.isEmpty = false;
@@ -40,14 +40,14 @@ public class Cart {
 	}
 	
 	public Item getCartItem(CartItem cartItem) {
-		int index = items.lastIndexOf(cartItem);
-		return items.get(index);
+		int index = cartItems.lastIndexOf(cartItem);
+		return cartItems.get(index);
 	}
 
 	public void deleteLastItem() {
-		Item item = items.get(items.size() - 1);
+		Item item = cartItems.get(cartItems.size() - 1);
 		preTaxTotal = preTaxTotal.subtract(item.getPrice());
-		items.remove(items.size() - 1);
+		cartItems.remove(cartItems.size() - 1);
 	}
 
 	public void adjustPreTaxTotal(String priceAdjustment) {
