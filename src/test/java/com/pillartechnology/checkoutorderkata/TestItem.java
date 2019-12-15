@@ -47,7 +47,7 @@ public class TestItem {
 	
 	@Test
 	public void shouldUpdateAsHavingMarkdownIfAdded() {
-		Markdown markdownBy1Dollar = new Markdown("1.00");
+		Markdown markdownBy1Dollar = new Markdown("$1.00 OFF","1.00");
 		
 		item1.addMarkdown(markdownBy1Dollar);
 		
@@ -56,7 +56,7 @@ public class TestItem {
 	
 	@Test
 	public void canIdentifyMarkdownAfterMarkdownIsAdded() {
-		Markdown markdownBy1Dollar = new Markdown("1.00");
+		Markdown markdownBy1Dollar = new Markdown("$1.00 OFF", "1.00");
 		
 		item1.addMarkdown(markdownBy1Dollar);
 		
