@@ -50,6 +50,14 @@ public class TestCartItem {
 		assertEquals(true, cartItem.isChargeByWeight());
 	}
 	
+	@Test
+	public void shouldReturnFalseIfCartItemChargeByWeightIsNotSet() {
+		Item item1 = new Item("Apples", "1.89");
+		
+		CartItem cartItem = new CartItem(item1);
+		
+		assertEquals(false, cartItem.isChargeByWeight());
+	}
 	
 	
 } // End TestCartItem()
