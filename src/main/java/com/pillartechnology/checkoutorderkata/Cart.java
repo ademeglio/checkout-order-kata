@@ -44,12 +44,12 @@ public class Cart {
 	}
 
 	public void deleteLastCartItem() {
-		Item item = cartItems.get(cartItems.size() - 1);
-		preTaxTotal = preTaxTotal.subtract(item.getPrice());
 		cartItems.remove(cartItems.size() - 1);
 	}
 
 	public void calculatePreTaxTotal() {
+		preTaxTotal = new BigDecimal("0.00");
+		
 		for (CartItem cartItem : cartItems) {
 			preTaxTotal = preTaxTotal.add(cartItem.getPrice());
 		}

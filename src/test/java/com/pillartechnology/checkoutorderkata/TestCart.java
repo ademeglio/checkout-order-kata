@@ -1,5 +1,6 @@
 package com.pillartechnology.checkoutorderkata;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -80,7 +81,6 @@ public class TestCart {
 	
 	@Test
 	public void shouldReturnPositivePreTaxTotalAfterCalculatingAddedUnitTypeCartItems() {
-		
 		cart.addCartItem(cartItem1); // Unit price of $1.99
 		cart.addCartItem(cartItem2); // Unit price of $1.99
 		
@@ -89,6 +89,18 @@ public class TestCart {
 		assertEquals("3.98", cart.getPreTaxTotal());
 	}
 	
+	@Test
+	public void shouldReturnCorrectTotalAfterDeletingCartItem() {
+		cart.addCartItem(cartItem1); // Unit price of $1.99
+		cart.addCartItem(cartItem2); // Unit price of $1.99
+		cart.calculatePreTaxTotal();
+		
+		cart.deleteLastCartItem();
+		cart.calculatePreTaxTotal();
+		
+		assertEquals("1.99", cart.getPreTaxTotal());
+		
+	}
 //	@Test
 //	public void shouldSubtractFromPreTaxTotalAfterDeletingLastUnitItem() {
 //		cart.addItem(item1); // Unit price of $1.99
