@@ -33,7 +33,6 @@ public class Cart {
 	
 	public void addCartItem(CartItem cartItem) {
 		cartItems.add(cartItem);
-//		preTaxTotal = preTaxTotal.add(item.getPrice());
 		if (isEmpty) {
 			this.isEmpty = false;
 		}
@@ -50,9 +49,16 @@ public class Cart {
 		cartItems.remove(cartItems.size() - 1);
 	}
 
+	//TODO Remove unused code?
 	public void adjustPreTaxTotal(String priceAdjustment) {
 		BigDecimal priceAdjustmentAmount = new BigDecimal(priceAdjustment);
 		preTaxTotal = preTaxTotal.add(priceAdjustmentAmount);
+	}
+
+	public void calculatePreTaxTotal() {
+		for (CartItem cartItem : cartItems) {
+			preTaxTotal = preTaxTotal.add(cartItem.getPrice());
+		}
 	}	
 
 	
