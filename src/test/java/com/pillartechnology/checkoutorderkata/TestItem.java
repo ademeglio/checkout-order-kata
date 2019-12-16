@@ -15,7 +15,7 @@ public class TestItem {
 	
 	@BeforeEach
 	public void setup() {
-		item1.setPrice("1.99");
+		item1.setDefaultPrice("1.99");
 	}
 	
 	@Test
@@ -37,7 +37,7 @@ public class TestItem {
 	
 	@Test
 	public void shouldAcceptPriceToChargeAsString() {
-		assertEquals("1.99", item1.getPrice().toString());
+		assertEquals("1.99", item1.getDefaultPrice().toString());
 	}
 	
 	@Test
@@ -92,7 +92,7 @@ public class TestItem {
 				
 		assertAll("item3",
 			() -> assertEquals("Sauce", item3.getName()),
-			() -> assertEquals("3.99", item3.getPrice().toString())
+			() -> assertEquals("3.99", item3.getDefaultPrice().toString())
 		);
 	}
 	
