@@ -59,5 +59,15 @@ public class TestCartItem {
 		assertEquals(false, cartItem.isChargeByWeight());
 	}
 	
+	@Test
+	public void shouldReturnCartItemWeightIfWeightIsEntered() {
+		Item item4 = new Item("Apples", "1.89", true);
+		
+		CartItem cartItem4 = new CartItem(item4);
+		cartItem4.setWeight(5.0);
+		
+		assertEquals(5.0, cartItem4.getWeight());
+	}
+	
 	
 } // End TestCartItem()

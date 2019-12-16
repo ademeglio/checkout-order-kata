@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 public class CartItem extends Item {
 
 	private BigDecimal salePrice;
+	private double weight;
 
 	// Constructor
 	public CartItem(Item item) {
@@ -13,6 +14,9 @@ public class CartItem extends Item {
 		this.salePrice = setSalePrice();
 	}
 
+	
+	// Getters & Setters
+	
 	public BigDecimal getSalePrice() {
 		return salePrice;
 	}
@@ -23,8 +27,16 @@ public class CartItem extends Item {
 			salePrice = salePrice.subtract(super.getMarkdown().getMarkdownAmount());
 			return salePrice;
 		}
-		
 		return salePrice;
 	}
+	
+	public void setWeight(double itemWeight) {
+		this.weight = itemWeight;
+	}
+	
+	public Double getWeight() {
+		return weight;
+	}
+
 
 } // End CartItem()
