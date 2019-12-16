@@ -30,7 +30,7 @@ public class TestCartItem {
 	public void shouldReturnInitialCartItemSalePrice() {
 		// Soup @ $1.99 per unit
 		
-		assertEquals("1.99", cartItem1.getSalePrice().toString());
+		assertEquals("1.99", cartItem1.getSellPrice().toString());
 	}
 	
 	@Test
@@ -40,7 +40,7 @@ public class TestCartItem {
 		item1.addMarkdown(markdownBy1Dollar);
 		
 		CartItem cartItem1 = new CartItem(item1);
-		assertEquals("0.99", cartItem1.getSalePrice().toString());	
+		assertEquals("0.99", cartItem1.getSellPrice().toString());	
 	}
 	
 	@Test
@@ -63,13 +63,21 @@ public class TestCartItem {
 	
 	@Test
 	public void shouldReturnCartItemWeightIfWeightIsEntered() {
-		Item item2 = new Item("Apples", "1.89", true);
+		Item item4 = new Item("Steak", "3.00", true);
 		
-		CartItem cartItem2 = new CartItem(item2);
-		cartItem2.setWeight(5.0);
+		CartItem cartItem4 = new CartItem(item4);
+		cartItem4.setWeight(5.0);
 		
-		assertEquals(5.0, cartItem2.getWeight());
+		cartItem4.setSellPrice();
+		
+		assertEquals(5.0, cartItem4.getWeight());
 	}
 	
+	
+	public void shouldReturnCorrectSalePriceIfCartItemChargeByWeightIsSetTrue() {
+		Item item2 = new Item("Apples", "1.90", true);
+		
+		
+	}
 	
 } // End TestCartItem()

@@ -4,30 +4,30 @@ import java.math.BigDecimal;
 
 public class CartItem extends Item {
 
-	private BigDecimal salePrice;
+	private BigDecimal sellPrice;
 	private double weight;
 
 	// Constructor
 	public CartItem(Item item) {
 		super(item.getName(), item.getPrice().toString(), item.isChargeByWeight());
 		super.addMarkdown(item.getMarkdown());
-		this.salePrice = setSalePrice();
+		this.sellPrice = setSellPrice();
 	}
 
 	
 	// Getters & Setters
 	
-	public BigDecimal getSalePrice() {
-		return salePrice;
+	public BigDecimal getSellPrice() {
+		return sellPrice;
 	}
 	
-	private BigDecimal setSalePrice() {
-		BigDecimal salePrice = super.getPrice();
+	public BigDecimal setSellPrice() {
+		BigDecimal sellPrice = super.getPrice();
 		if (super.getMarkdown() != null) {
-			salePrice = salePrice.subtract(super.getMarkdown().getMarkdownAmount());
-			return salePrice;
+			sellPrice = sellPrice.subtract(super.getMarkdown().getMarkdownAmount());
+			return sellPrice;
 		}
-		return salePrice;
+		return sellPrice;
 	}
 	
 	public void setWeight(double itemWeight) {
