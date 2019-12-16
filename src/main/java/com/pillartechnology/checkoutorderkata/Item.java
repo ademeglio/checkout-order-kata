@@ -82,5 +82,12 @@ public class Item {
 		this.special = special1;
 	}
 
+	@Override
+	public String toString() {
+		return "Item [name=" + name + ", defaultPrice=" + defaultPrice + ", isChargeByWeight=" + isChargeByWeight
+				+ ", hasMarkdown=" + hasMarkdown + ", markdown=" + markdown + ", hasSpecial=" + hasSpecial
+				+ ", special=" + special + "]";
+	}
 
+	
 } // End Item()
