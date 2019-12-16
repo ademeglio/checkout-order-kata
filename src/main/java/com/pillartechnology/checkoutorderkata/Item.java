@@ -6,7 +6,7 @@ public class Item {
 
 	private String name;
 	private boolean isChargeByWeight;
-	private BigDecimal price;
+	private BigDecimal defaultPrice;
 	private boolean hasMarkdown;
 	private Markdown markdown;
 	private boolean hasSpecial;
@@ -17,15 +17,15 @@ public class Item {
 		this.name = itemName;
 	}
 	
-	public Item(String itemName, String price) {
+	public Item(String itemName, String defaultPrice) {
 		this.name = itemName;
-		this.price = new BigDecimal(price);
+		this.defaultPrice = new BigDecimal(defaultPrice);
 	}
 	
 
-	public Item(String itemName, String price, boolean isChargeByWeight) {
+	public Item(String itemName, String defaultPrice, boolean isChargeByWeight) {
 		this.name = itemName;
-		this.price = new BigDecimal(price);
+		this.defaultPrice = new BigDecimal(defaultPrice);
 		this.isChargeByWeight = isChargeByWeight;
 	}
 
@@ -36,12 +36,12 @@ public class Item {
 		return name;
 	}
 	
-	public BigDecimal getPrice() {
-		return price;
+	public BigDecimal getDefaultPrice() {
+		return defaultPrice;
 	}
 	
-	public void setPrice(String priceAsString) {
-		this.price = new BigDecimal(priceAsString);
+	public void setDefaultPrice(String defaultPrice) {
+		this.defaultPrice = new BigDecimal(defaultPrice);
 	}
 
 	public boolean isChargeByWeight() {
