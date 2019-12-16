@@ -21,8 +21,8 @@ _TODO ADD INSTRUCTIONS BEFORE SENDING IN FOR REVIEW_
 
 - [ ] You will need a way to configure the prices of scannable items prior to being scanned.
 - [x] Accept a scanned item. The total should reflect an increase by the per-unit price after the scan. 
-- [ ] Accept a scanned item and a weight. The total should reflect an increase of the price of the item for the given weight.
-- [ ] Support a markdown. A marked-down item will reflect the per-unit cost less the markdown when scanned. A weighted item with a markdown will reflect that reduction in cost per unit.
+- [x] Accept a scanned item and a weight. The total should reflect an increase of the price of the item for the given weight.
+- [x] Support a markdown. A marked-down item will reflect the per-unit cost less the markdown when scanned. A weighted item with a markdown will reflect that reduction in cost per unit.
 - [ ] Support a special in the form of "Buy N items get M at %X off." For example, "Buy 1 get 1 free" or "Buy 2 get 1 half off."
 - [ ] Support a special in the form of "N for $X." For example, "3 for $5.00"
 - [ ] Support a limit on specials, for example, "buy 2 get 1 free, limit 6" would prevent getting a third free item.
