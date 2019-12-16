@@ -134,5 +134,19 @@ public class TestCart {
 		assertEquals("15.00", cart.getPreTaxTotal());
 	}
 	
+	@Test
+	public void shouldReturnCorrectPreTaxTotalIfACartItemIsChargeByWeightAndHasMarkdown() {
+		Markdown markdown = new Markdown("$1.00 OFF PER LB", "1.00");
+		Item item4 = new Item("Steak", "3.00", true);
+		item4.addMarkdown(markdown);
+		
+		CartItem cartItem4 = new CartItem(item4, 5.00);
+		
+		cart.addCartItem(cartItem4);
+		cart.calculatePreTaxTotal();
+		
+		assertEquals("10.00", cart.getPreTaxTotal());
+	}
+	
 	
 } // End TestCart()
