@@ -11,17 +11,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class TestCart {
 	
 	Cart cart = new Cart();
-	Item item1 = new Item("Soup");
-	Item item2 = new Item("Bread");
+	Item item1 = new Item("Soup", "1.99");
+	Item item2 = new Item("Bread", "1.99");
 	
 	CartItem cartItem1;
 	CartItem cartItem2;
 	
 	@BeforeEach
 	public void setup() {
-		item1.setPrice("1.99");
-		item2.setPrice("1.99");
-		
 		cartItem1 = new CartItem(item1);
 		cartItem2 = new CartItem(item2);
 	}
@@ -35,7 +32,6 @@ public class TestCart {
 	
 	@Test
 	public void shouldBeAbleToAddACartItem() {
-		CartItem cartItem1 = new CartItem(item1);
 		cart.addCartItem(cartItem1);
 		
 		assertEquals(cartItem1, cart.getCartItem(cartItem1));
@@ -43,17 +39,13 @@ public class TestCart {
 	
 	@Test
 	public void shouldNotBeEmptyAfterAddingCartItem() {
-		CartItem cartItem1 = new CartItem(item1);
 		cart.addCartItem(cartItem1);
 		
 		assertEquals(false, cart.isEmpty());
 	}
 	
 	@Test
-	public void shouldBeAbleToAddMoreThanOneCartItem() {
-		CartItem cartItem1 = new CartItem(item1);
-		CartItem cartItem2 = new CartItem(item2);
-		
+	public void shouldBeAbleToAddMoreThanOneCartItem() {	
 		cart.addCartItem(cartItem1);
 		cart.addCartItem(cartItem2);
 		
@@ -62,9 +54,6 @@ public class TestCart {
 	
 	@Test
 	public void shouldBeAbleToDeleteLastAddedItem() {
-		CartItem cartItem1 = new CartItem(item1);
-		CartItem cartItem2 = new CartItem(item2);
-		
 		cart.addCartItem(cartItem1);
 		cart.addCartItem(cartItem2);
 		
@@ -103,9 +92,9 @@ public class TestCart {
 
 	@Test
 	public void shouldDeleteRescannedCartItemAndDisplayCorrectPreTaxTotal() {
-		cart.addCartItem(cartItem1); // Unit price of $1.99
-		cart.addCartItem(cartItem1); // Unit price of $1.99
-		cart.addCartItem(cartItem2); // Unit price of $1.99
+		cart.addCartItem(cartItem1); // Soup w/ unit price of $1.99
+		cart.addCartItem(cartItem1); // Soup w/ unit price of $1.99
+		cart.addCartItem(cartItem2); // Bread w/ unit price of $1.99
 		cart.calculatePreTaxTotal();
 		
 		cart.deleteCartItem(cartItem1);
@@ -131,5 +120,6 @@ public class TestCart {
 		assertEquals("2.98", cart.getPreTaxTotal());
 		
 	}
+	
 	
 } // End TestCart()
