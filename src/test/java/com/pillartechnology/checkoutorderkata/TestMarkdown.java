@@ -15,5 +15,12 @@ public class TestMarkdown {
 		assertEquals("1.00", markdown.getMarkdownAmount().toString());
 	}
 	
+	@Test
+	public void shouldReturnMarkdownDescription() {
+		Markdown markdown = new Markdown("$1.00 OFF", "1.00");
+		
+		assertEquals("$1.00 OFF", markdown.getDescription());
+	}
+	
 	
 } // End TestMarkdown()
