@@ -16,10 +16,20 @@ public class CartItem extends Item {
 	public CartItem(Item item) {
 		super(item.getName(), item.getDefaultPrice().toString(), item.isChargeByWeight());
 		super.addMarkdown(item.getMarkdown());
+		
 		calculateSellPrice();
 		logger.info("Created cart-item with: " + item.toString());
 	}
 
+	public CartItem(Item item, double weight) {
+		super(item.getName(), item.getDefaultPrice().toString(), item.isChargeByWeight());
+		super.addMarkdown(item.getMarkdown());
+		this.weight = weight;
+		
+		calculateSellPrice();
+		logger.info("Created cart-item with: " + item.toString()
+				+ "[weight: " + weight + "]");
+	}
 	
 	// Getters & Setters
 	
@@ -29,7 +39,6 @@ public class CartItem extends Item {
 	
 	public void setWeight(double weight) {
 		this.weight = weight;
-		logger.info(this.getName() + " weighs " + weight + " units");
 	}
 	
 	public Double getWeight() {

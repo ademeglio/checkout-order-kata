@@ -118,7 +118,20 @@ public class TestCart {
 		cart.calculatePreTaxTotal();
 		
 		assertEquals("2.98", cart.getPreTaxTotal());
+	}
+	
+	@Test
+	public void shouldReturnCorrectPreTaxTotalIfACartItemIsChargeByWeight() {
+		Item item4 = new Item("Steak", "3.00", true);
 		
+		/* TODO Application should prompt for weight if(isChargeByWeight)*/
+		
+		CartItem cartItem4 = new CartItem(item4, 5.00);
+		
+		cart.addCartItem(cartItem4);
+		cart.calculatePreTaxTotal();
+		
+		assertEquals("15.00", cart.getPreTaxTotal());
 	}
 	
 	
