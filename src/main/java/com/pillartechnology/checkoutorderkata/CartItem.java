@@ -2,16 +2,22 @@ package com.pillartechnology.checkoutorderkata;
 
 import java.math.BigDecimal;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class CartItem extends Item {
 
+	Logger logger = LoggerFactory.getLogger(CartItem.class);
+	
 	private BigDecimal sellPrice;
-	private double weight;
+	private double weight = 0.0;
 
 	// Constructor
 	public CartItem(Item item) {
-		super(item.getName(), item.getPrice().toString(), item.isChargeByWeight());
+		super(item.getName(), item.getDefaultPrice().toString(), item.isChargeByWeight());
 		super.addMarkdown(item.getMarkdown());
-		this.sellPrice = setSellPrice();
+		calculateSellPrice();
+		logger.info("Created cart-item with: " + item.toString());
 	}
 
 	
@@ -21,21 +27,42 @@ public class CartItem extends Item {
 		return sellPrice;
 	}
 	
-	public BigDecimal setSellPrice() {
-		BigDecimal sellPrice = super.getPrice();
-		if (super.getMarkdown() != null) {
-			sellPrice = sellPrice.subtract(super.getMarkdown().getMarkdownAmount());
-			return sellPrice;
-		}
-		return sellPrice;
-	}
-	
-	public void setWeight(double itemWeight) {
-		this.weight = itemWeight;
+	public void setWeight(double weight) {
+		this.weight = weight;
+		logger.info(this.getName() + " weighs " + weight + " units");
 	}
 	
 	public Double getWeight() {
 		return weight;
+	}
+	
+	
+	// Methods
+	
+	public void calculateSellPrice() {
+		this.sellPrice = super.getDefaultPrice();
+		
+		if (super.getMarkdown() != null) {
+			logger.info(super.getMarkdown().getDescription() 
+					+ " markdown applied to default price for " + this.getName());
+			sellPrice = sellPrice.subtract(super.getMarkdown().getMarkdownAmount());
+		}
+		
+		if (super.isChargeByWeight()) {
+			
+			/* Since this is run at initialization, we need to bypass
+			 * This at the first pass, or a zero weight sets sellPrice to zero.
+			 */
+			
+			if (this.getWeight() != 0.0) {
+				sellPrice = sellPrice.multiply(new BigDecimal(getWeight()));
+				logger.info(super.getName() 
+						+ " is charged by weight. Total weight: " + this.getWeight()
+						+ " units. Calculated sell price is: " + sellPrice.toString());
+			}	
+			
+		}
+		
 	}
 
 
