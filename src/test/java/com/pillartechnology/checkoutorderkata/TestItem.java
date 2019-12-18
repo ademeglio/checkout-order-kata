@@ -89,6 +89,26 @@ public class TestItem {
 	}
 	
 	@Test
+	public void canIdentifySpecialDescriptionAfterSpecialIsAdded() {
+		BuyNGetMatXPercentOff special1 = new BuyNGetMatXPercentOff(
+				1,1,0.50);
+		
+		item1.addSpecial(special1);
+		
+		assertEquals("Buy 1 item, get 1 at 50% off", item1.getSpecial().toString());
+	}
+	
+	@Test
+	public void canIdentifySpecialDescriptionAfterSpecialIsAddedThatIdentifiesXAsFree() {
+		BuyNGetMatXPercentOff special1 = new BuyNGetMatXPercentOff(
+				1,1,1.00);
+		
+		item1.addSpecial(special1);
+		
+		assertEquals("Buy 1 get 1 free", item1.getSpecial().toString());
+	}
+	
+	@Test
 	public void canInstantiateItemWithNameAndPrice() {
 		Item item3 = new Item("Sauce", "3.99");
 				
