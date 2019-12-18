@@ -21,4 +21,11 @@ public class TestSpecial {
 		
 		assertEquals(1, special1.getReceiveQtyItems());
 	}
+	
+	@Test
+	public void shouldBeAbleToSetDiscountAmount() {
+		BuyNGetMatXPercentOff special1 = new BuyNGetMatXPercentOff(1,1,100.00);
+		
+		assertEquals(100.00, special1.getDiscountPercentage());
+	}
 } // End TestSpecial();

@@ -8,7 +8,7 @@ public class BuyNGetMatXPercentOff extends Special{
 			int receiveQtyItems, double percentOff) {
 		super(buyQtyRequirement);
 		this.receiveQtyItems = receiveQtyItems;
-		
+		this.discountPercentage = percentOff;
 	}
 
 
