@@ -70,7 +70,8 @@ public class TestItem {
 	
 	@Test
 	public void shouldUpdateAsHavingSpecialIfAdded() {
-		Special special1 = new Special();
+		BuyNGetMatXPercentOff special1 = new BuyNGetMatXPercentOff(
+				1,1,0.50);
 		
 		item1.addSpecial(special1);
 		
@@ -79,7 +80,8 @@ public class TestItem {
 	
 	@Test
 	public void canIdentifySpecialAfterSpecialIsAdded() {
-		Special special1 = new Special();
+		BuyNGetMatXPercentOff special1 = new BuyNGetMatXPercentOff(
+				1,1,0.50);
 		
 		item1.addSpecial(special1);
 		
