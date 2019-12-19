@@ -1,6 +1,8 @@
 package com.pillartechnology.checkoutorderkata;
 
-public class Special {
+import java.math.BigDecimal;
+
+public abstract class Special {
 	
 	private int buyQtyRequirement;
 	protected int receiveQtyItems;
@@ -25,6 +27,12 @@ public class Special {
 	public double getDiscountPercentage() {
 		return discountPercentage;
 	}
+	
+	// methods
+	
+	// Method to override for each special type
+	public abstract BigDecimal calculateDiscountAmount(Item item, int itemBuyCount);
+	
 	
 	
 } // End Special()
