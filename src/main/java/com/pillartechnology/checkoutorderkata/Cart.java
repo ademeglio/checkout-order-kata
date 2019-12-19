@@ -78,9 +78,16 @@ public class Cart {
 
 	public int countItemOnSpecial(Item item) {
 		String itemNameOnSpecial = item.getName();
-		System.out.println("♥: "+ itemNameOnSpecial);
-		System.out.println("♦: " + itemsOnSpecial);
-		return itemsOnSpecial.get(itemNameOnSpecial);
+		int qtyItemOnSpecial = 0;
+		
+		try {
+			 qtyItemOnSpecial = itemsOnSpecial.get(itemNameOnSpecial);
+		}
+		catch(Exception e) {
+			return qtyItemOnSpecial;
+		}
+		
+		return qtyItemOnSpecial;
 	}	
 
 	

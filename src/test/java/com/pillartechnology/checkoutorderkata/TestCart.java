@@ -172,6 +172,10 @@ public class TestCart {
 		assertEquals(3, cart.countItemOnSpecial(item3));
 	}
 	
+	
+	@Test public void shouldNotKeepCountOfEachItemTypeInTheCartWithoutSpecial() {
+		assertEquals(0, cart.countItemOnSpecial(cartItem1));
+	}
 //	@Test
 //	public void shouldReturnCorrectPreTaxTotalForSpecialBuyNGetMAtXPercentOff() {
 //		BuyNGetMatXPercentOff special1 = new BuyNGetMatXPercentOff(1,1,0.50);
