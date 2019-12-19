@@ -16,6 +16,7 @@ public class CartItem extends Item {
 	public CartItem(Item item) {
 		super(item.getName(), item.getDefaultPrice().toString(), item.isChargeByWeight());
 		super.addMarkdown(item.getMarkdown());
+		super.addSpecial(item.getSpecial());
 		
 		calculateSellPrice();
 		logger.info("Created cart-item with: " + item.toString());

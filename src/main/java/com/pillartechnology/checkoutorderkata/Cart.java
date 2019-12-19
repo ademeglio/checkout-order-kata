@@ -2,16 +2,19 @@ package com.pillartechnology.checkoutorderkata;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Cart {
 
 	private boolean isEmpty = true;
 	private List<CartItem> cartItems = new ArrayList<CartItem>();
 	private BigDecimal preTaxTotal = new BigDecimal("0.00");
+	private Map<String, Integer> itemsOnSpecial = new HashMap<String, Integer>();
 
-	// Constructor
-	
+	// Default Constructor
+	public Cart() {}
 	
 	
 	// Getters & Setters
@@ -33,8 +36,22 @@ public class Cart {
 	
 	public void addCartItem(CartItem cartItem) {
 		cartItems.add(cartItem);
+		System.out.println("Cart Item (" + cartItem.getName() 
+			+ ") Has Special: " + cartItem.hasSpecial());
 		if (isEmpty) {
 			this.isEmpty = false;
+		}
+		
+		// Track number of items that are on special
+		if (cartItem.hasSpecial()) {
+			String itemName = cartItem.getName();
+			Integer itemCount = 0;
+			if (itemsOnSpecial.containsKey(itemName)) {
+				itemCount = itemsOnSpecial.get(itemName);
+				itemsOnSpecial.put(itemName,  itemCount + 1);
+			} else {
+				this.itemsOnSpecial.put(cartItem.getName(), 1);
+			}
 		}
 	}
 	
@@ -57,6 +74,13 @@ public class Cart {
 
 	public void deleteCartItem(CartItem cartItem1) {
 		cartItems.remove(cartItem1);
+	}
+
+	public int countItemOnSpecial(Item item) {
+		String itemNameOnSpecial = item.getName();
+		System.out.println("♥: "+ itemNameOnSpecial);
+		System.out.println("♦: " + itemsOnSpecial);
+		return itemsOnSpecial.get(itemNameOnSpecial);
 	}	
 
 	

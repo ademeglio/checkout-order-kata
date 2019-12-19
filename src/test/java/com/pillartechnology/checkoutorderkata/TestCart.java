@@ -149,21 +149,45 @@ public class TestCart {
 	}
 	
 	@Test
-	public void shouldReturnCorrectPreTaxTotalForSpecialBuyNGetMAtXPercentOff() {
+	public void shouldKeepCountOfEachItemTypeInTheCartThatHasSpecial() {
 		BuyNGetMatXPercentOff special1 = new BuyNGetMatXPercentOff(1,1,0.50);
 		
-		Item item5 = new Item("Taco Shells", "4.00");
-		item5.addSpecial(special1);
+		Item item3 = new Item("Peanut Butter", "1.00");
+		Item item4 = new Item("Jelly", "1.00");
 		
-		CartItem cartItem5 = new CartItem(item5);
-		CartItem cartItem6 = new CartItem(item5); // Second Item Should Be discounted
+		item3.addSpecial(special1);
 		
-		cart.addCartItem(cartItem5);
-		cart.addCartItem(cartItem6);
-		cart.calculatePreTaxTotal();
+		CartItem cartItem1a = new CartItem(item3);
+		CartItem cartItem2a = new CartItem(item4);
+		CartItem cartItem3a = new CartItem(item3);
+		CartItem cartItem4a = new CartItem(item4);
+		CartItem cartItem5a = new CartItem(item3);
 		
-		assertEquals("6.00", cart.getPreTaxTotal());
+		cart.addCartItem(cartItem1a); // item3
+		cart.addCartItem(cartItem2a);
+		cart.addCartItem(cartItem3a); // item3
+		cart.addCartItem(cartItem4a);
+		cart.addCartItem(cartItem5a); // item3
+		
+		assertEquals(3, cart.countItemOnSpecial(item3));
 	}
+	
+//	@Test
+//	public void shouldReturnCorrectPreTaxTotalForSpecialBuyNGetMAtXPercentOff() {
+//		BuyNGetMatXPercentOff special1 = new BuyNGetMatXPercentOff(1,1,0.50);
+//		
+//		Item item5 = new Item("Taco Shells", "4.00");
+//		item5.addSpecial(special1);
+//		
+//		CartItem cartItem5 = new CartItem(item5);
+//		CartItem cartItem6 = new CartItem(item5); // Second Item Should Be discounted
+//		
+//		cart.addCartItem(cartItem5);
+//		cart.addCartItem(cartItem6);
+//		cart.calculatePreTaxTotal();
+//		
+//		assertEquals("6.00", cart.getPreTaxTotal());
+//	}
 	
 	
 } // End TestCart()
