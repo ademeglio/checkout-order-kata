@@ -6,12 +6,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Cart {
 
+	Logger logger = LoggerFactory.getLogger(Cart.class);
+	
 	private boolean isEmpty = true;
 	private List<CartItem> cartItems = new ArrayList<CartItem>();
 	private BigDecimal preTaxTotal = new BigDecimal("0.00");
-	private Map<String, Integer> itemsOnSpecial = new HashMap<String, Integer>();
+	private Map<Item, Integer> itemsOnSpecial = new HashMap<Item, Integer>();
 
 	// Default Constructor
 	public Cart() {}
@@ -36,26 +41,26 @@ public class Cart {
 	
 	public void addCartItem(CartItem cartItem) {
 		cartItems.add(cartItem);
-		System.out.println("Cart Item (" + cartItem.getName() 
-			+ ") Has Special: " + cartItem.hasSpecial());
+		
 		if (isEmpty) {
 			this.isEmpty = false;
 		}
 		
 		// Track number of items that are on special
-		if (cartItem.hasSpecial()) {
-			String itemName = cartItem.getName();
+		if (cartItem.getItem().hasSpecial()) {
+			Item item = cartItem.getItem();
 			Integer itemCount = 0;
-			if (itemsOnSpecial.containsKey(itemName)) {
-				itemCount = itemsOnSpecial.get(itemName);
-				itemsOnSpecial.put(itemName,  itemCount + 1);
+			
+			if (itemsOnSpecial.containsKey(item)) {
+				itemCount = itemsOnSpecial.get(item);
+				itemsOnSpecial.put(item,  itemCount + 1);
 			} else {
-				this.itemsOnSpecial.put(cartItem.getName(), 1);
+				this.itemsOnSpecial.put(item, 1);
 			}
 		}
 	}
 	
-	public Item getCartItem(CartItem cartItem) {
+	public CartItem getCartItem(CartItem cartItem) {
 		int index = cartItems.lastIndexOf(cartItem);
 		return cartItems.get(index);
 	}
@@ -70,6 +75,14 @@ public class Cart {
 		for (CartItem cartItem : cartItems) {
 			preTaxTotal = preTaxTotal.add(cartItem.getSellPrice());
 		}
+		
+		/* Go through specials and manually adjust price accordingly
+		 * This way, if an item or items are removed to the point
+		 * that the special no longer applies, it will recalculate
+		 * accordingly.
+		 */
+		
+//		preTaxTotal = preTaxTotal.adjustForSpecials();
 	}
 
 	public void deleteCartItem(CartItem cartItem1) {
@@ -77,18 +90,55 @@ public class Cart {
 	}
 
 	public int countItemOnSpecial(Item item) {
-		String itemNameOnSpecial = item.getName();
+		
 		int qtyItemOnSpecial = 0;
 		
 		try {
-			 qtyItemOnSpecial = itemsOnSpecial.get(itemNameOnSpecial);
+			 qtyItemOnSpecial = itemsOnSpecial.get(item);
 		}
 		catch(Exception e) {
 			return qtyItemOnSpecial;
 		}
 		
 		return qtyItemOnSpecial;
-	}	
+	}
 
+
+	public void adjustForSpecials() {
+		// Instance Variables
+		BigDecimal specialDiscountAmount = new BigDecimal(0.0);
+		/* Get List of Specials to iterate through, log if
+		 * there aren't any for trouble shooting. 
+		 */
+		if (itemsOnSpecial.isEmpty()) {
+			logger.info("No specials to calculate");
+		} else {
+			for (Map.Entry<Item, Integer> value : itemsOnSpecial.entrySet()) {
+				
+				/* Need a reference to the CartItem to get the special
+				 * to apply for each item on special
+				 */
+				logger.info("The following item is on special: " + value.getKey());
+				int itemBuyCount = value.getValue();
+				
+				
+				/* Then process the sellPrice against the special, for
+				 * example Buy N Get M at X Percent Off. We need the
+				 * total amount to subtract from the pretax total
+				 */
+				
+				
+				
+			}
+		
+		this.preTaxTotal = preTaxTotal.subtract(specialDiscountAmount);
+			
+		}
+		// for each key
+		
+			
+		
+	}
+	
 	
 } // End Cart();

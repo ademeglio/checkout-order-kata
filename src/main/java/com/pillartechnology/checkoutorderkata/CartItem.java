@@ -5,26 +5,23 @@ import java.math.BigDecimal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CartItem extends Item {
+public class CartItem {
 
 	Logger logger = LoggerFactory.getLogger(CartItem.class);
 	
+	private Item item;
 	private BigDecimal sellPrice;
 	private double weight = 0.0;
 
-	// Constructor
+	// Constructors
 	public CartItem(Item item) {
-		super(item.getName(), item.getDefaultPrice().toString(), item.isChargeByWeight());
-		super.addMarkdown(item.getMarkdown());
-		super.addSpecial(item.getSpecial());
-		
+		this.item = item;
 		calculateSellPrice();
 		logger.info("Created cart-item with: " + item.toString());
 	}
 
 	public CartItem(Item item, double weight) {
-		super(item.getName(), item.getDefaultPrice().toString(), item.isChargeByWeight());
-		super.addMarkdown(item.getMarkdown());
+		this.item = item;
 		this.weight = weight;
 		
 		calculateSellPrice();
@@ -33,6 +30,14 @@ public class CartItem extends Item {
 	}
 	
 	// Getters & Setters
+	
+	public String getName() {
+		return item.getName();
+	}
+	
+	public Item getItem() {
+		return item;
+	}
 	
 	public BigDecimal getSellPrice() {
 		return sellPrice;
@@ -48,17 +53,17 @@ public class CartItem extends Item {
 	
 	
 	// Methods
-	
+
 	public void calculateSellPrice() {
-		this.sellPrice = super.getDefaultPrice();
+		this.sellPrice = item.getDefaultPrice();
 		
-		if (super.getMarkdown() != null) {
-			logger.info(super.getMarkdown().getDescription() 
-					+ " markdown applied to default price for " + this.getName());
-			sellPrice = sellPrice.subtract(super.getMarkdown().getMarkdownAmount());
+		if (item.getMarkdown() != null) {
+			logger.info(item.getMarkdown().getDescription() 
+					+ " markdown applied to default price for " + item.getName());
+			sellPrice = sellPrice.subtract(item.getMarkdown().getMarkdownAmount());
 		}
 		
-		if (super.isChargeByWeight()) {
+		if (item.isChargeByWeight()) {
 			
 			/* Since this is run at initialization, we need to bypass
 			 * This at the first pass, or a zero weight sets sellPrice to zero.
@@ -66,7 +71,7 @@ public class CartItem extends Item {
 			
 			if (this.getWeight() != 0.0) {
 				sellPrice = sellPrice.multiply(new BigDecimal(getWeight()));
-				logger.info(super.getName() 
+				logger.info(item.getName() 
 						+ " is charged by weight. Total weight: " + this.getWeight()
 						+ " units. Calculated sell price is: " + sellPrice.toString());
 			}	
@@ -74,6 +79,8 @@ public class CartItem extends Item {
 		}
 		
 	}
+	
+	
 
 
 } // End CartItem()
