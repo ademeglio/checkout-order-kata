@@ -5,9 +5,9 @@ import java.util.Comparator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-public class Inventory {
+public  class Inventory {
 
-	SortedSet<Item> items = Collections.synchronizedSortedSet(new TreeSet<Item>(Comparator.comparing(Item::getName)));
+	private SortedSet<Item> items = Collections.synchronizedSortedSet(new TreeSet<Item>(Comparator.comparing(Item::getName)));
 	
 	// Getters & Setters
 	
