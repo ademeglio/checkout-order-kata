@@ -55,13 +55,9 @@ public class CartItem {
 	// Methods
 
 	public void calculateSellPrice() {
-		this.sellPrice = item.getDefaultPrice();
+		this.sellPrice = item.getSalePrice();
 		
-		if (item.getMarkdown() != null) {
-			logger.info(item.getMarkdown().getDescription() 
-					+ " markdown applied to default price for " + item.getName());
-			sellPrice = sellPrice.subtract(item.getMarkdown().getMarkdownAmount());
-		}
+		
 		
 		if (item.isChargeByWeight()) {
 			

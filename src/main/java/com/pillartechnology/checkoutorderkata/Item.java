@@ -2,8 +2,13 @@ package com.pillartechnology.checkoutorderkata;
 
 import java.math.BigDecimal;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Item {
 
+	Logger logger = LoggerFactory.getLogger(Item.class);
+	
 	private String name;
 	private boolean isChargeByWeight;
 	private BigDecimal defaultPrice;
@@ -11,6 +16,7 @@ public class Item {
 	private Markdown markdown;
 	private boolean hasSpecial;
 	private Special special;
+	private BigDecimal salePrice;
 
 	// Constructors
 	public Item(String itemName) {
@@ -20,12 +26,14 @@ public class Item {
 	public Item(String itemName, String defaultPrice) {
 		this.name = itemName;
 		this.defaultPrice = new BigDecimal(defaultPrice);
+		this.salePrice = this.defaultPrice;
 	}
 	
 
 	public Item(String itemName, String defaultPrice, boolean isChargeByWeight) {
 		this.name = itemName;
 		this.defaultPrice = new BigDecimal(defaultPrice);
+		this.salePrice = this.defaultPrice;
 		this.isChargeByWeight = isChargeByWeight;
 	}
 
@@ -67,6 +75,10 @@ public class Item {
 	public Special getSpecial() {
 		return special;
 	}	
+	
+	public BigDecimal getSalePrice() {
+		return salePrice;
+	}
 
 	
 	// Methods
@@ -74,19 +86,27 @@ public class Item {
 	public void addMarkdown(Markdown markdown) {
 		this.hasMarkdown = true;
 		this.markdown = markdown;
+		this.calculateSalePrice();
 	}
-
 
 	public void addSpecial(Special special1) {
 		this.hasSpecial = true;
 		this.special = special1;
 	}
-
+	
+	public void calculateSalePrice() {
+		if (this.getMarkdown() != null) {
+			logger.info(this.getMarkdown().getDescription() 
+					+ " markdown applied to default price for " + this.getName());
+			salePrice = defaultPrice.subtract(this.getMarkdown().getMarkdownAmount());
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return "Item [name=" + name + ", defaultPrice=" + defaultPrice + ", isChargeByWeight=" + isChargeByWeight
 				+ ", hasMarkdown=" + hasMarkdown + ", markdown=" + markdown + ", hasSpecial=" + hasSpecial
-				+ ", special=" + special + "]";
+				+ ", special=" + special + ", salePrice=" + salePrice + "]";
 	}
 
 	
