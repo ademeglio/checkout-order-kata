@@ -25,13 +25,14 @@ public class BuyNGetMatXPercentOff extends Special{
 			itemsRemaining = itemsRemaining - buyQtyRequirement;
 			
 			if (itemsRemaining >= receiveDiscountOnQty) {
-			discountAmount = item.getSalePrice().multiply(new BigDecimal(itemsRemaining)); 
+				BigDecimal discountedUnitSalePrice = item.getSalePrice().multiply(new BigDecimal(this.getDiscountPercentage()/100)); 
+				discountAmount = discountedUnitSalePrice.multiply(new BigDecimal(itemsRemaining));
 			}
 			
-			return discountAmount;
+			return discountAmount.setScale(2);
 		}
 		
-		return discountAmount;
+		return discountAmount.setScale(2);
 	}
 	
 	@Override
@@ -42,13 +43,13 @@ public class BuyNGetMatXPercentOff extends Special{
 				? "items"
 				: "item";
 				
-		if (percentOff == 100) {
+		if (percentOff == 1.00) {
 			return "Buy " + buyQty + " get " + this.getReceiveQtyItems() 
 				+ " free";
 		}
 		
 		return "Buy " + buyQty + " " + itemOrItems + ", get " 
-			+ this.receiveQtyItems + " at " + percentOff 
+			+ this.receiveQtyItems + " at " + percentOff
 			+ "% off";
 	}
 
