@@ -115,17 +115,23 @@ public class Cart {
 		} else {
 			for (Map.Entry<Item, Integer> value : itemsOnSpecial.entrySet()) {
 				
-				/* Need a reference to the CartItem to get the special
+				Item item = value.getKey();
+				int itemBuyCount = value.getValue();
+				Special special = item.getSpecial();
+				
+				/* Need a reference to the CartItem.getItem() to get the special
 				 * to apply for each item on special
 				 */
-				logger.info("The following item is on special: " + value.getKey());
-				int itemBuyCount = value.getValue();
-				
-				
+				logger.info("The following item is on special: " 
+						+ item.getName() + ", " 
+						+ special.toString());
+
 				/* Then process the sellPrice against the special, for
 				 * example Buy N Get M at X Percent Off. We need the
 				 * total amount to subtract from the pretax total
 				 */
+				
+				specialDiscountAmount = special.calculateDiscountAmount(item, itemBuyCount);
 				
 				
 				
