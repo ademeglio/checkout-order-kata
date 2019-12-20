@@ -82,7 +82,7 @@ public class Cart {
 		 * accordingly.
 		 */
 		
-//		preTaxTotal = preTaxTotal.adjustForSpecials();
+		this.adjustForSpecials();
 	}
 
 	public void deleteCartItem(CartItem cartItem1) {

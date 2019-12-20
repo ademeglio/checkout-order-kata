@@ -38,12 +38,12 @@ public class BuyNGetMatXPercentOff extends Special{
 	@Override
 	public String toString() {
 		int buyQty = this.getBuyQtyRequirement();
-		int percentOff = (int) (this.getDiscountPercentage() * 100);
+		double percentOff = (this.getDiscountPercentage());
 		String itemOrItems = buyQty > 1
 				? "items"
 				: "item";
 				
-		if (percentOff == 1.00) {
+		if (percentOff == 100.00) {
 			return "Buy " + buyQty + " get " + this.getReceiveQtyItems() 
 				+ " free";
 		}

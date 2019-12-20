@@ -196,5 +196,50 @@ public class TestCart {
 		assertEquals("6.00", cart.getPreTaxTotal());
 	}
 	
+	@Test
+	public void shouldReturnCorrectPreTaxTotalForSpecialBuy2Get1AtHalfOff() {
+		BuyNGetMatXPercentOff special1 = new BuyNGetMatXPercentOff(2,1,50);
+		
+		Item item5 = new Item("Taco Shells", "4.00");
+		item5.addSpecial(special1);
+		
+		// Create Cart Items
+		CartItem cartItem3  = new CartItem(item1);
+		CartItem cartItem4  = new CartItem(item2);
+		CartItem cartItem5  = new CartItem(item5);
+		CartItem cartItem6  = new CartItem(item5);
+		CartItem cartItem7  = new CartItem(item5);
+		CartItem cartItem8  = new CartItem(item5);
+		CartItem cartItem9  = new CartItem(item5);
+		CartItem cartItem10 = new CartItem(item5);
+		
+		cart.addCartItem(cartItem1); //Soup, 1.99
+		cart.addCartItem(cartItem2); //Bread, 1.99
+		cart.addCartItem(cartItem3); //Soup, 1.99
+		cart.addCartItem(cartItem4); //Bread, 1.99
+		cart.addCartItem(cartItem5); //Taco Shells, 4.00 
+		cart.addCartItem(cartItem6); //Taco Shells, 4.00
+		cart.addCartItem(cartItem7); //Taco Shells, 2.00 *Discounted
+		cart.addCartItem(cartItem8); //Taco Shells, 4.00
+		cart.addCartItem(cartItem9); //Taco Shells, 4.00
+		cart.addCartItem(cartItem10);//Taco Shells, 2.00 *Discounted
+		
+		for (CartItem cartItem : cart.getCartItems()) {
+			System.out.print("Added " + cartItem.getName() + "(" 
+					+ cartItem.getSellPrice() + ")");
+			if (cartItem.getItem().hasSpecial()) {
+				System.out.print("* \n");
+			} else {
+				System.out.print("\n");
+			}
+			
+		}
+		
+		cart.calculatePreTaxTotal();
+//		cart.adjustForSpecials();
+		
+		assertEquals("27.96", cart.getPreTaxTotal());
+	}
+	
 	
 } // End TestCart()
