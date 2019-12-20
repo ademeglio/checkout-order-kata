@@ -60,7 +60,7 @@ public class TestCart {
 		cart.deleteLastCartItem();
 		
 		assertEquals(1, cart.getCartItems().size());
-		assertEquals(false, cart.getCartItems().contains(item2));
+		assertEquals(false, cart.getCartItems().contains(cartItem2));
 	}
 	
 	@Test 
@@ -179,7 +179,7 @@ public class TestCart {
 	
 	@Test
 	public void shouldReturnCorrectPreTaxTotalForSpecialBuyNGetMAtXPercentOff() {
-		BuyNGetMatXPercentOff special1 = new BuyNGetMatXPercentOff(1,1,0.50);
+		BuyNGetMatXPercentOff special1 = new BuyNGetMatXPercentOff(1,1,50);
 		
 		Item item5 = new Item("Taco Shells", "4.00");
 		item5.addSpecial(special1);
