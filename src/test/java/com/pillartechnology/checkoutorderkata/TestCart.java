@@ -179,6 +179,7 @@ public class TestCart {
 	
 	@Test
 	public void shouldReturnCorrectPreTaxTotalForSpecialBuyNGetMAtXPercentOff() {
+		/// Buy 1 get 1 at 50% off
 		BuyNGetMatXPercentOff special1 = new BuyNGetMatXPercentOff(1,1,50);
 		
 		Item item5 = new Item("Taco Shells", "4.00");
@@ -191,13 +192,13 @@ public class TestCart {
 		cart.addCartItem(cartItem6);
 		
 		cart.calculatePreTaxTotal();
-		cart.adjustForSpecials();
 		
 		assertEquals("6.00", cart.getPreTaxTotal());
 	}
 	
 	@Test
 	public void shouldReturnCorrectPreTaxTotalForSpecialBuy2Get1AtHalfOff() {
+		// Buy 2 get 1 at 50% discount
 		BuyNGetMatXPercentOff special1 = new BuyNGetMatXPercentOff(2,1,50);
 		
 		Item item5 = new Item("Taco Shells", "4.00");
@@ -224,19 +225,7 @@ public class TestCart {
 		cart.addCartItem(cartItem9); //Taco Shells, 4.00
 		cart.addCartItem(cartItem10);//Taco Shells, 2.00 *Discounted
 		
-		for (CartItem cartItem : cart.getCartItems()) {
-			System.out.print("Added " + cartItem.getName() + "(" 
-					+ cartItem.getSellPrice() + ")");
-			if (cartItem.getItem().hasSpecial()) {
-				System.out.print("* \n");
-			} else {
-				System.out.print("\n");
-			}
-			
-		}
-		
 		cart.calculatePreTaxTotal();
-//		cart.adjustForSpecials();
 		
 		assertEquals("27.96", cart.getPreTaxTotal());
 	}

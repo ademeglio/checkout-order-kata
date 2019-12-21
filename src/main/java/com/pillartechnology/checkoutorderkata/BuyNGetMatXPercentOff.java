@@ -20,18 +20,26 @@ public class BuyNGetMatXPercentOff extends Special{
 		int itemsRemaining = itemBuyCount;
 		int receiveDiscountOnQty = this.getReceiveQtyItems();
 		
-		if (itemBuyCount >= buyQtyRequirement) {
+		while (itemsRemaining > buyQtyRequirement) {
+			BigDecimal amountToAddToDiscount = new BigDecimal("0.0");
 			
+			// Special Applies; adjust items remaining first
 			itemsRemaining = itemsRemaining - buyQtyRequirement;
 			
-			if (itemsRemaining >= receiveDiscountOnQty) {
-				BigDecimal discountedUnitSalePrice = item.getSalePrice().multiply(new BigDecimal(this.getDiscountPercentage()/100)); 
-				discountAmount = discountedUnitSalePrice.multiply(new BigDecimal(itemsRemaining));
-			}
+			// Calculate discounted unit price * item default/ sale price
+			BigDecimal discountedUnitSalePrice = item.getSalePrice()
+					.multiply(new BigDecimal(this.getDiscountPercentage()/100));
+
+			// Calculate the amount to add to the total discount amount
+			amountToAddToDiscount = discountedUnitSalePrice
+					.multiply(new BigDecimal(receiveDiscountOnQty));
 			
-			return discountAmount.setScale(2);
-		}
-		
+			/* Add the calculated amount and adjust the items remaining by items
+			 * purchased at discount. 
+			 */
+			discountAmount = discountAmount.add(amountToAddToDiscount);
+			itemsRemaining = itemsRemaining - receiveDiscountOnQty;
+		} // End while
 		return discountAmount.setScale(2);
 	}
 	
