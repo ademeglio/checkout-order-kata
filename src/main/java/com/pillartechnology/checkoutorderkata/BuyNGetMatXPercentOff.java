@@ -51,7 +51,7 @@ public class BuyNGetMatXPercentOff extends Special{
 				? "items"
 				: "item";
 				
-		if (percentOff == 100.00) {
+		if (percentOff == 1.00) {
 			return "Buy " + buyQty + " get " + this.getReceiveQtyItems() 
 				+ " free";
 		}

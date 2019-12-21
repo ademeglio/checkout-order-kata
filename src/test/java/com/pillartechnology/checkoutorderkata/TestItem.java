@@ -91,11 +91,11 @@ public class TestItem {
 	@Test
 	public void canIdentifySpecialDescriptionAfterSpecialIsAdded() {
 		BuyNGetMatXPercentOff special1 = new BuyNGetMatXPercentOff(
-				1,1,0.50);
+				1,1,50);
 		
 		item1.addSpecial(special1);
 		
-		assertEquals("Buy 1 item, get 1 at 50% off", item1.getSpecial().toString());
+		assertEquals("Buy 1 item, get 1 at 50.0% off", item1.getSpecial().toString());
 	}
 	
 	@Test
