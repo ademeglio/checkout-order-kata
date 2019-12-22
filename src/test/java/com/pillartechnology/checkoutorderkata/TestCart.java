@@ -230,5 +230,25 @@ public class TestCart {
 		assertEquals("27.96", cart.getPreTaxTotal());
 	}
 	
+	@Test
+	public void shouldSupportSpecialNforXDollars() {
+		// Support a special in the form of "N for $X." For example, "3 for $5.00"
+		BuyNForM special2 = new BuyNForM(3,"5.00");
+		
+		item1.addSpecial(special2);
+		
+		CartItem cartItem3  = new CartItem(item1);
+		CartItem cartItem4  = new CartItem(item1);
+		
+		cart.addCartItem(cartItem1); // Soup, 1.99
+		cart.addCartItem(cartItem2); // Bread, 1.99
+		cart.addCartItem(cartItem3); // Soup, 1.99
+		cart.addCartItem(cartItem4); // Soup, 1.99
+		
+		cart.calculatePreTaxTotal();
+		
+		assertEquals("6.99", cart.getPreTaxTotal());
+	}
+	
 	
 } // End TestCart()
