@@ -282,5 +282,32 @@ public class TestCart {
 		assertEquals("15.92", cart.getPreTaxTotal());	
 	}
 	
+	@Test
+	public void shouldApplyLimitOnSpecialBuyNForX() {
+		// "buy 2 for $3.00, limit 4
+		BuyNForX special2 = new BuyNForX(2, "3.00");
+		
+		item1.addSpecial(special2);
+		special2.setLimit(4);
+		
+		CartItem cartItem3 = new CartItem(item1);
+		CartItem cartItem4 = new CartItem(item1);
+		CartItem cartItem5 = new CartItem(item1);
+		CartItem cartItem6 = new CartItem(item1);
+		CartItem cartItem7 = new CartItem(item1);
+		
+		cart.addCartItem(cartItem1); // Soup, 1.99 (1) *
+		cart.addCartItem(cartItem2); // Bread, 1.99
+		cart.addCartItem(cartItem3); // Soup, 1.99 (2) *
+		cart.addCartItem(cartItem4); // Soup, 1.99 (3) *
+		cart.addCartItem(cartItem5); // Soup, 1.99 (4) *
+		cart.addCartItem(cartItem6); // Soup, 1.99 (5)
+		cart.addCartItem(cartItem7); // Soup, 1.99 (6)
+		
+		cart.calculatePreTaxTotal();
+		// should be 1.96 off
+		assertEquals("11.97", cart.getPreTaxTotal());
+	}
+	
 	
 } // End TestCart()

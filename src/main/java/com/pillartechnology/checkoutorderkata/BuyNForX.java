@@ -18,7 +18,7 @@ public class BuyNForX extends Special{
 		BigDecimal discountAmount = new BigDecimal("0.00");
 		int buyQtyRequirement = this.getBuyQtyRequirement();
 		int itemsRemaining = itemBuyCount;
-		
+
 		if (this.getLimit() > 0) {
 			itemsRemaining = this.getLimit();
 		}
@@ -50,7 +50,6 @@ public class BuyNForX extends Special{
 			 * purchased at discount. 
 			 */
 			discountAmount = discountAmount.add(amountToAddToDiscount);
-			
 		} // End while
 		return discountAmount.setScale(2, RoundingMode.HALF_UP);
 	}
@@ -58,8 +57,11 @@ public class BuyNForX extends Special{
 	@Override
 	public String toString() {
 		int buyQty = this.getBuyQtyRequirement();
+		String addLimit = this.getLimit() > 0
+				? ", limit " + this.getLimit()
+				: "";
 		
-		return buyQty + " for $" + itemsDiscountedPrice;
+		return buyQty + " for $" + itemsDiscountedPrice + addLimit;
 	}
 
 	
