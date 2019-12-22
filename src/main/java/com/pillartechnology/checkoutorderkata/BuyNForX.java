@@ -18,6 +18,10 @@ public class BuyNForX extends Special{
 		BigDecimal discountAmount = new BigDecimal("0.00");
 		int buyQtyRequirement = this.getBuyQtyRequirement();
 		int itemsRemaining = itemBuyCount;
+		
+		if (this.getLimit() > 0) {
+			itemsRemaining = this.getLimit();
+		}
 
 		while (itemsRemaining >= buyQtyRequirement) {
 			BigDecimal amountToAddToDiscount = new BigDecimal("0.0");

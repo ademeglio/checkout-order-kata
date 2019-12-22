@@ -70,4 +70,19 @@ public class TestSpecial {
 		assertEquals("2.00", discountAmount.toString());
 	}
 	
+	@Test
+	public void shouldBeAbleToSetLimitOnSpecialBuyNForX() {
+		BuyNForX special2 = new BuyNForX(3, "5.00");
+		
+		// Set limit to 3
+		special2.setLimit(3);
+		
+		Item item = new Item("Candy", "2.00");
+		int itemBuyCount = 6; // Without Limit discount is $2.00; with limit 3 discount is $1.00
+		
+		BigDecimal discountAmount = special2.calculateDiscountAmount(item, itemBuyCount);
+		
+		assertEquals("1.00", discountAmount.toString());
+	}
+	
 } // End TestSpecial();
