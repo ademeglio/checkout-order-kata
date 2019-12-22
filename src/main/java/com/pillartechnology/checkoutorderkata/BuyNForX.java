@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
-public class BuyNForM extends Special{
+public class BuyNForX extends Special{
 
 	private BigDecimal itemsDiscountedPrice;
 
-	public BuyNForM(int buyQtyRequirement, String itemsPrice) {
+	public BuyNForX(int buyQtyRequirement, String itemsPrice) {
 		super(buyQtyRequirement);
 		this.itemsDiscountedPrice = new BigDecimal(itemsPrice);
 	}
@@ -18,13 +18,13 @@ public class BuyNForM extends Special{
 		BigDecimal discountAmount = new BigDecimal("0.00");
 		int buyQtyRequirement = this.getBuyQtyRequirement();
 		int itemsRemaining = itemBuyCount;
-		System.out.println("Item buy count: " + itemBuyCount);
+
 		while (itemsRemaining >= buyQtyRequirement) {
 			BigDecimal amountToAddToDiscount = new BigDecimal("0.0");
 			
 			// Special Applies; adjust items remaining first
 			itemsRemaining = itemsRemaining - buyQtyRequirement;
-			System.out.println("Items remaining is now: " + itemsRemaining);
+
 			/* 
 			 * Calculate discounted unit price.
 			 * Divide total itemsPriceAmount by buyQtyRequirement
@@ -34,16 +34,14 @@ public class BuyNForM extends Special{
 			MathContext mc = new MathContext(4, RoundingMode.HALF_UP);
 			BigDecimal discountUnitPriceBy = this.itemsDiscountedPrice
 					.divide(new BigDecimal(buyQtyRequirement), mc);
-			System.out.println("Should be 1.67: " + discountUnitPriceBy.toString());
 			
 			BigDecimal discountedUnitSalePrice = item.getSalePrice()
 					.subtract(discountUnitPriceBy);
-			System.out.println("Should be .323: " + discountedUnitSalePrice);
 			
 			// Calculate the amount to add to the total discount amount
 			amountToAddToDiscount = discountedUnitSalePrice
 					.multiply(new BigDecimal(buyQtyRequirement), mc);
-			System.out.println("Should be .97: " + amountToAddToDiscount.toString());
+
 			/* Add the calculated amount and adjust the items remaining by items
 			 * purchased at discount. 
 			 */

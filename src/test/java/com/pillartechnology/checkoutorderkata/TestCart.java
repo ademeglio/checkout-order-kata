@@ -233,7 +233,7 @@ public class TestCart {
 	@Test
 	public void shouldSupportSpecialNforXDollars() {
 		// Support a special in the form of "N for $X." For example, "3 for $5.00"
-		BuyNForM special2 = new BuyNForM(3,"5.00");
+		BuyNForX special2 = new BuyNForX(3,"5.00");
 		
 		item1.addSpecial(special2);
 		

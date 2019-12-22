@@ -89,9 +89,9 @@ public class Item {
 		this.calculateSalePrice();
 	}
 
-	public void addSpecial(Special special1) {
+	public void addSpecial(Special special) {
 		this.hasSpecial = true;
-		this.special = special1;
+		this.special = special;
 	}
 	
 	public void calculateSalePrice() {

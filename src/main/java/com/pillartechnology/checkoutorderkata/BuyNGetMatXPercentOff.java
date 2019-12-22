@@ -1,11 +1,11 @@
 package com.pillartechnology.checkoutorderkata;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class BuyNGetMatXPercentOff extends Special{
 
 	// Constructor
-	
 	public BuyNGetMatXPercentOff(int buyQtyRequirement,
 			int receiveQtyItems, double percentOff) {
 		super(buyQtyRequirement);
@@ -20,6 +20,7 @@ public class BuyNGetMatXPercentOff extends Special{
 		int itemsRemaining = itemBuyCount;
 		int receiveDiscountOnQty = this.getReceiveQtyItems();
 		
+		// TODO double check that this shouldn't be >= instead of >
 		while (itemsRemaining > buyQtyRequirement) {
 			BigDecimal amountToAddToDiscount = new BigDecimal("0.0");
 			
@@ -40,7 +41,7 @@ public class BuyNGetMatXPercentOff extends Special{
 			discountAmount = discountAmount.add(amountToAddToDiscount);
 			itemsRemaining = itemsRemaining - receiveDiscountOnQty;
 		} // End while
-		return discountAmount.setScale(2);
+		return discountAmount.setScale(2, RoundingMode.HALF_UP);
 	}
 	
 	@Override

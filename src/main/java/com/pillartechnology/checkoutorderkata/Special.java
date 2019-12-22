@@ -34,5 +34,4 @@ public abstract class Special {
 	public abstract BigDecimal calculateDiscountAmount(Item item, int itemBuyCount);
 	
 	
-	
 } // End Special()
