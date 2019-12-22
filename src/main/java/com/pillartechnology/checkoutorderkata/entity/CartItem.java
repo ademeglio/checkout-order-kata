@@ -59,6 +59,13 @@ public class CartItem {
 	
 	/* Methods */
 
+	/**
+	 * CalculateSellPrice by copying the item sell
+	 * price to the CartItem sell price. If the CartItem
+	 * is charge by weight, the sell price is
+	 * recalculated in the method by multiplying the cartItem.weight
+	 *  x cartItem.sellPrice.
+	 */
 	public void calculateSellPrice() {
 		this.sellPrice = item.getSalePrice();
 		
