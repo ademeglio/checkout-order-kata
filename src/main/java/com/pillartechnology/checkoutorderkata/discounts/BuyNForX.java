@@ -1,18 +1,33 @@
-package com.pillartechnology.checkoutorderkata;
+package com.pillartechnology.checkoutorderkata.discounts;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
+import com.pillartechnology.checkoutorderkata.entity.Item;
+
+/**
+ * BuyNForX extends Special() allowing to configure
+ * Buy N items for $x dollars.
+ *
+ */
 public class BuyNForX extends Special{
 
 	private BigDecimal itemsDiscountedPrice;
 
+	// Constructor
 	public BuyNForX(int buyQtyRequirement, String itemsPrice) {
 		super(buyQtyRequirement);
 		this.itemsDiscountedPrice = new BigDecimal(itemsPrice);
 	}
 
+	/**
+	 * Returns a BigDecimal representing the total calculated
+	 * discount for a given Item in the cart that is on special.
+	 * @param item an item object in the cart that has a special.
+	 * @param itemBuyCount is the number of items of type item in the cart on special.
+	 * @return The total calculated decimal amount as a Big Decimal.
+	 */
 	@Override
 	public BigDecimal calculateDiscountAmount(Item item, int itemBuyCount) {
 		BigDecimal discountAmount = new BigDecimal("0.00");

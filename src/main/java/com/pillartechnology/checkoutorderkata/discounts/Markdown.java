@@ -1,4 +1,4 @@
-package com.pillartechnology.checkoutorderkata;
+package com.pillartechnology.checkoutorderkata.discounts;
 
 import java.math.BigDecimal;
 

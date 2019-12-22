@@ -1,4 +1,4 @@
-package com.pillartechnology.checkoutorderkata;
+package com.pillartechnology.checkoutorderkata.entity;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -9,9 +9,11 @@ public  class Inventory {
 
 	private SortedSet<Item> items = Collections.synchronizedSortedSet(new TreeSet<Item>(Comparator.comparing(Item::getName)));
 	
-	// Getters & Setters
+	// Default Constructor
+	public Inventory() {};
 	
-
+	/* Getters & Setters */
+	
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
 		return true;
@@ -22,14 +24,11 @@ public  class Inventory {
 	}
 	
 	
-	// Methods
+	/* Methods */
 	
 	public void addItem(Item item) {
 		items.add(item);
 	}
-
-
-
 
 
 } // End Inventory()

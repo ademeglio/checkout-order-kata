@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.pillartechnology.checkoutorderkata.entity.Inventory;
+import com.pillartechnology.checkoutorderkata.entity.Item;
+
 @SpringBootTest
 public class TestInventory {
 

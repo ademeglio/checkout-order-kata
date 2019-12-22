@@ -1,8 +1,14 @@
-package com.pillartechnology.checkoutorderkata;
+package com.pillartechnology.checkoutorderkata.discounts;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import com.pillartechnology.checkoutorderkata.entity.Item;
+
+/**
+ * BuyNGetMatXPercentOff extends Special() allowing to configure
+ * Buy N items and get M items at %x off.
+ */
 public class BuyNGetMatXPercentOff extends Special{
 
 	// Constructor
@@ -13,6 +19,13 @@ public class BuyNGetMatXPercentOff extends Special{
 		this.discountPercentage = percentOff;
 	}
 	
+	/**
+	 * Returns a BigDecimal representing the total calculated
+	 * discount for a given Item in the cart that is on special.
+	 * @param item an item object in the cart that has a special.
+	 * @param itemBuyCount is the number of items of type item in the cart on special.
+	 * @return The total calculated decimal amount as a Big Decimal.
+	 */
 	@Override
 	public BigDecimal calculateDiscountAmount(Item item, int itemBuyCount) {
 		BigDecimal discountAmount = new BigDecimal("0.00");

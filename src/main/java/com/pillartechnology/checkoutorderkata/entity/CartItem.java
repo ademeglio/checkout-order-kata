@@ -1,10 +1,14 @@
-package com.pillartechnology.checkoutorderkata;
+package com.pillartechnology.checkoutorderkata.entity;
 
 import java.math.BigDecimal;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * CartItem stores an Item that is added to a Cart.
+ *
+ */
 public class CartItem {
 
 	Logger logger = LoggerFactory.getLogger(CartItem.class);
@@ -13,7 +17,8 @@ public class CartItem {
 	private BigDecimal sellPrice;
 	private double weight = 0.0;
 
-	// Constructors
+	/* Constructors */
+	
 	public CartItem(Item item) {
 		this.item = item;
 		calculateSellPrice();
@@ -29,7 +34,7 @@ public class CartItem {
 				+ "[weight: " + weight + "]");
 	}
 	
-	// Getters & Setters
+	/* Getters & Setters */
 	
 	public String getName() {
 		return item.getName();
@@ -52,12 +57,10 @@ public class CartItem {
 	}
 	
 	
-	// Methods
+	/* Methods */
 
 	public void calculateSellPrice() {
 		this.sellPrice = item.getSalePrice();
-		
-		
 		
 		if (item.isChargeByWeight()) {
 			
@@ -71,12 +74,8 @@ public class CartItem {
 						+ " is charged by weight. Total weight: " + this.getWeight()
 						+ " units. Calculated sell price is: " + sellPrice.toString());
 			}	
-			
 		}
-		
 	}
-	
-	
 
 
 } // End CartItem()

@@ -1,4 +1,4 @@
-package com.pillartechnology.checkoutorderkata;
+package com.pillartechnology.checkoutorderkata.entity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -9,6 +9,14 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.pillartechnology.checkoutorderkata.discounts.Special;
+
+/**
+ * Cart allows tracking of items added to a cart
+ * as a CartItem. The pre-tax total is calculated
+ * every time a CartItem is added.
+ *
+ */
 public class Cart {
 
 	Logger logger = LoggerFactory.getLogger(Cart.class);
@@ -22,7 +30,7 @@ public class Cart {
 	public Cart() {}
 	
 	
-	// Getters & Setters
+	/* Getters & Setters */
 	
 	public boolean isEmpty() {
 		return isEmpty;
@@ -35,10 +43,22 @@ public class Cart {
 	public String getPreTaxTotal() {
 		return preTaxTotal.toString() ;
 	}
-
 	
-	// Methods
+	public CartItem getCartItem(CartItem cartItem) {
+		int index = cartItems.lastIndexOf(cartItem);
+		return cartItems.get(index);
+	}
 	
+	/* Methods */
+	
+	/**
+	 * Adds CartItem to the cart and if the CartItem
+	 * contains an Item that is on special, will add
+	 * the item to itemsOnSpecial to track the number
+	 * of items of that type.
+	 * @param cartItem is an item added to the cart containing
+	 * a reference to the Item.
+	 */
 	public void addCartItem(CartItem cartItem) {
 		cartItems.add(cartItem);
 		
@@ -59,16 +79,20 @@ public class Cart {
 			}
 		}
 	}
-	
-	public CartItem getCartItem(CartItem cartItem) {
-		int index = cartItems.lastIndexOf(cartItem);
-		return cartItems.get(index);
-	}
 
 	public void deleteLastCartItem() {
 		cartItems.remove(cartItems.size() - 1);
 	}
 
+	/**
+	 * Iterate through the cartItems and total up the pre-tax total.
+	 * The preTaxTotal is reset to zero each time this method is run
+	 * so that if an item or items are deleted, the correct amount can
+	 * be calculated.
+	 * <p> If there are any specials, the total discount amount is subtracted
+	 * from the pre-tax total.
+	 * </p>
+	 */
 	public void calculatePreTaxTotal() {
 		preTaxTotal = new BigDecimal("0.00");
 		
@@ -81,7 +105,6 @@ public class Cart {
 		 * that the special no longer applies, it will recalculate
 		 * accordingly.
 		 */
-		
 		this.adjustForSpecials();
 	}
 
@@ -104,6 +127,10 @@ public class Cart {
 	}
 
 
+	/**
+	 * Adjusts for any items that are on special, including any limits that
+	 * may be applied.
+	 */
 	public void adjustForSpecials() {
 		// Instance Variables
 		BigDecimal specialDiscountAmount = new BigDecimal(0.0);
@@ -132,18 +159,10 @@ public class Cart {
 				 */
 				
 				specialDiscountAmount = special.calculateDiscountAmount(item, itemBuyCount);
-				
-				
-				
 			}
 		
-		this.preTaxTotal = preTaxTotal.subtract(specialDiscountAmount);
-			
+		this.preTaxTotal = preTaxTotal.subtract(specialDiscountAmount);	
 		}
-		// for each key
-		
-			
-		
 	}
 	
 	

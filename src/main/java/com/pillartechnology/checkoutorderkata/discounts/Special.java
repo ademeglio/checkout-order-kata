@@ -1,7 +1,16 @@
-package com.pillartechnology.checkoutorderkata;
+package com.pillartechnology.checkoutorderkata.discounts;
 
 import java.math.BigDecimal;
 
+import com.pillartechnology.checkoutorderkata.entity.Item;
+
+/**
+ * Special is the abstract base class for all specials
+ * which allows assigning different specials to items.
+ *
+ *@version 1.0.0
+ *@since 1.0.0
+ */
 public abstract class Special {
 	
 	private int buyQtyRequirement;
@@ -15,7 +24,7 @@ public abstract class Special {
 	}
 	
 	
-	// Getters & Setters
+	/* Getters & Setters */
 	
 	public int getBuyQtyRequirement() {
 		return buyQtyRequirement;
@@ -37,7 +46,7 @@ public abstract class Special {
 		this.limit = limit;
 	}
 	
-	// methods
+	/* methods */
 	
 	public abstract BigDecimal calculateDiscountAmount(Item item, int itemBuyCount);
 	

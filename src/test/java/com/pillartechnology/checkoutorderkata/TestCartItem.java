@@ -6,6 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.pillartechnology.checkoutorderkata.discounts.Markdown;
+import com.pillartechnology.checkoutorderkata.entity.CartItem;
+import com.pillartechnology.checkoutorderkata.entity.Item;
+
 @SpringBootTest
 public class TestCartItem {
 

@@ -1,10 +1,17 @@
-package com.pillartechnology.checkoutorderkata;
+package com.pillartechnology.checkoutorderkata.entity;
 
 import java.math.BigDecimal;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.pillartechnology.checkoutorderkata.discounts.Markdown;
+import com.pillartechnology.checkoutorderkata.discounts.Special;
+
+/**
+ * Item is the item that is being sold to the end user.
+ * It stores various state information used by the application.
+ */
 public class Item {
 
 	Logger logger = LoggerFactory.getLogger(Item.class);
@@ -18,7 +25,7 @@ public class Item {
 	private Special special;
 	private BigDecimal salePrice;
 
-	// Constructors
+	/* Constructors */
 	public Item(String itemName) {
 		this.name = itemName;
 	}
@@ -81,7 +88,7 @@ public class Item {
 	}
 
 	
-	// Methods
+	/* Methods */
 
 	public void addMarkdown(Markdown markdown) {
 		this.hasMarkdown = true;
@@ -94,6 +101,15 @@ public class Item {
 		this.special = special;
 	}
 	
+	/**
+	 * Sale price is calculated whenever the item is created
+	 * with a default price. The initial sale price is set at
+	 * the default price unless there is a Markdown().
+	 * 
+	 * <p>If there is a Markdown(), the sale price is calculated
+	 * by subtracting the markdown amount from the default price.
+	 * </p>
+	 */
 	public void calculateSalePrice() {
 		if (this.getMarkdown() != null) {
 			logger.info(this.getMarkdown().getDescription() 
