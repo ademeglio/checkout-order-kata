@@ -316,5 +316,30 @@ public class TestCart {
 		assertEquals("11.97", cart.getPreTaxTotal());
 	}
 	
+	@Test
+	public void shouldVoidSpecialIfDeletingScannedItemOnSpecialBuyNForX() {
+		// "buy 3 for $3.00
+		BuyNForX special2 = new BuyNForX(3, "3.00");
+		
+		cartItem1.getItem().addSpecial(special2);
+		
+		CartItem cartItem3 = new CartItem(item1);
+		CartItem cartItem4 = new CartItem(item1);
+		
+		cart.addCartItem(cartItem1); // Soup, 1.99 (1) *
+		cart.addCartItem(cartItem2); // Bread, 1.99
+		cart.addCartItem(cartItem3); // Soup, 1.99 (2) *
+		cart.addCartItem(cartItem4); // Soup, 1.99 (3) *
+		
+		cart.calculatePreTaxTotal();
+		
+		assertEquals("4.99", cart.getPreTaxTotal());
+		
+		cart.deleteCartItem(cartItem4);
+		cart.calculatePreTaxTotal();
+		
+		assertEquals("5.97", cart.getPreTaxTotal());
+	}
 	
+
 } // End TestCart()
