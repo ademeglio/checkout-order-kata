@@ -81,7 +81,25 @@ public class Cart {
 	}
 
 	public void deleteLastCartItem() {
-		cartItems.remove(cartItems.size() - 1);
+		int indexOfLast = cartItems.size() - 1;
+		Item item = cartItems.get(indexOfLast).getItem();
+		Integer itemCount = itemsOnSpecial.get(item);
+		cartItems.remove(indexOfLast);
+		
+		if (item.hasSpecial()) {
+			itemsOnSpecial.put(item, itemCount - 1);
+		}
+	}
+	
+	public void deleteCartItem(CartItem cartItem) {
+		Item item = cartItem.getItem();
+		cartItems.remove(cartItem);
+		Integer itemCount = itemsOnSpecial.get(item);
+		
+		// remove item from itemsOnSpecial if applicable
+		if (item.hasSpecial()) {
+			itemsOnSpecial.put(item, itemCount - 1);
+		}
 	}
 
 	/**
@@ -106,17 +124,6 @@ public class Cart {
 		 * accordingly.
 		 */
 		this.adjustForSpecials();
-	}
-
-	public void deleteCartItem(CartItem cartItem) {
-		Item item = cartItem.getItem();
-		cartItems.remove(cartItem);
-		Integer itemCount = itemsOnSpecial.get(item);
-		
-		// remove item from itemsOnSpecial if applicable
-		if (item.hasSpecial()) {
-			itemsOnSpecial.put(item, itemCount - 1);
-		}
 	}
 
 	public int countItemOnSpecial(Item item) {
