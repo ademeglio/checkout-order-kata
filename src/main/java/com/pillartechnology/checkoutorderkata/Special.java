@@ -7,6 +7,7 @@ public abstract class Special {
 	private int buyQtyRequirement;
 	protected int receiveQtyItems;
 	protected double discountPercentage;
+	private int limit;
 	
 	// Constructor
 	public Special(int buyQtyRequirement) {
@@ -28,9 +29,16 @@ public abstract class Special {
 		return discountPercentage;
 	}
 	
+	public int getLimit() {
+		return limit;
+	}
+
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
+	
 	// methods
 	
-	// Method to override for each special type
 	public abstract BigDecimal calculateDiscountAmount(Item item, int itemBuyCount);
 	
 	

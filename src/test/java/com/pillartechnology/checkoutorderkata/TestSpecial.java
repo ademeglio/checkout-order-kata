@@ -55,4 +55,19 @@ public class TestSpecial {
 		assertEquals("1.00", discountAmount.toString());
 	}
 	
+	@Test
+	public void shouldBeAbleToSetLimitOnSpecials() {
+		BuyNGetMatXPercentOff special1 = new BuyNGetMatXPercentOff(1,1,100.00);
+		
+		// Set limit to 2
+		special1.setLimit(2);
+		
+		Item item = new Item("Candy", "2.00");
+		int itemBuyCount = 4; // Without Limit discount is $4.00; with limit 2 discount is $2.00
+		
+		BigDecimal discountAmount = special1.calculateDiscountAmount(item, itemBuyCount);
+		
+		assertEquals("2.00", discountAmount.toString());
+	}
+	
 } // End TestSpecial();

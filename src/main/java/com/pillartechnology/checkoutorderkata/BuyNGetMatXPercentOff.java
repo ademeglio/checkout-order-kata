@@ -20,6 +20,10 @@ public class BuyNGetMatXPercentOff extends Special{
 		int itemsRemaining = itemBuyCount;
 		int receiveDiscountOnQty = this.getReceiveQtyItems();
 		
+		if (this.getLimit() > 0) {
+			itemsRemaining = this.getLimit();
+		} 
+
 		// TODO double check that this shouldn't be >= instead of >
 		while (itemsRemaining > buyQtyRequirement) {
 			BigDecimal amountToAddToDiscount = new BigDecimal("0.0");
@@ -43,7 +47,7 @@ public class BuyNGetMatXPercentOff extends Special{
 		} // End while
 		return discountAmount.setScale(2, RoundingMode.HALF_UP);
 	}
-	
+
 	@Override
 	public String toString() {
 		int buyQty = this.getBuyQtyRequirement();
@@ -61,7 +65,6 @@ public class BuyNGetMatXPercentOff extends Special{
 			+ this.receiveQtyItems + " at " + percentOff
 			+ "% off";
 	}
-
 
 
 } // End BuyNGetMatXPercentOff()
