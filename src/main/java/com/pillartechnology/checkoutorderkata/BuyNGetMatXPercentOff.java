@@ -55,15 +55,20 @@ public class BuyNGetMatXPercentOff extends Special{
 		String itemOrItems = buyQty > 1
 				? "items"
 				: "item";
-				
+		
+		String addLimit = this.getLimit() > 0
+				? ", limit " + this.getLimit()
+				: "";
 		if (percentOff == 1.00) {
 			return "Buy " + buyQty + " get " + this.getReceiveQtyItems() 
 				+ " free";
 		}
 		
+		
+		
 		return "Buy " + buyQty + " " + itemOrItems + ", get " 
 			+ this.receiveQtyItems + " at " + percentOff
-			+ "% off";
+			+ "% off" + addLimit;
 	}
 
 

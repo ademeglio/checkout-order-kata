@@ -250,5 +250,37 @@ public class TestCart {
 		assertEquals("6.99", cart.getPreTaxTotal());
 	}
 	
+	@Test
+	public void shouldApplyLimitOnSpecialWhenApplied() {
+		//"buy 2 get 1 free, limit 6" would prevent getting a third free item.
+		BuyNGetMatXPercentOff special1 = new BuyNGetMatXPercentOff(2,1,100);
+		
+		item1.addSpecial(special1);
+		special1.setLimit(6);
+		
+		CartItem cartItem3 = new CartItem(item1);
+		CartItem cartItem4 = new CartItem(item1);
+		CartItem cartItem5 = new CartItem(item1);
+		CartItem cartItem6 = new CartItem(item1);
+		CartItem cartItem7 = new CartItem(item1);
+		CartItem cartItem8 = new CartItem(item1);
+		CartItem cartItem9 = new CartItem(item1);
+		
+		cart.addCartItem(cartItem1); // Soup, 1.99 (1)
+		cart.addCartItem(cartItem2); // Bread, 1.99
+		cart.addCartItem(cartItem3); // Soup, 1.99 (2)
+		cart.addCartItem(cartItem4); // Soup, 1.99 (3) * Discounted 100%
+		cart.addCartItem(cartItem5); // Soup, 1.99 (4)
+		cart.addCartItem(cartItem5); // Soup, 1.99 (5)
+		cart.addCartItem(cartItem6); // Soup, 1.99 (6) * Discounted 100%
+		cart.addCartItem(cartItem7); // Soup, 1.99 (7) 
+		cart.addCartItem(cartItem8); // Soup, 1.99 (8)
+		cart.addCartItem(cartItem9); // Soup, 1.99 (9) 
+		
+		cart.calculatePreTaxTotal();
+		
+		assertEquals("15.92", cart.getPreTaxTotal());	
+	}
+	
 	
 } // End TestCart()
