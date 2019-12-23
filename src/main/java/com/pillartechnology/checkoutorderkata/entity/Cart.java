@@ -43,7 +43,11 @@ public class Cart {
 		return cartItems;
 	}
 	
-	public String getPreTaxTotal() {
+	public BigDecimal getPreTaxTotal() {
+		return preTaxTotal;
+	}
+	
+	public String getPreTaxTotalString() {
 		return preTaxTotal.toString() ;
 	}
 	

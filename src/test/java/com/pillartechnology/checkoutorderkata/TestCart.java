@@ -72,7 +72,7 @@ public class TestCart {
 	
 	@Test 
 	public void shouldReturnPreTaxTotalAsZeroWhenEmpty() {
-		assertEquals("0.00", cart.getPreTaxTotal());
+		assertEquals("0.00", cart.getPreTaxTotalString());
 	}
 	
 	@Test
@@ -82,7 +82,7 @@ public class TestCart {
 		
 		cart.calculatePreTaxTotal();
 		
-		assertEquals("3.98", cart.getPreTaxTotal());
+		assertEquals("3.98", cart.getPreTaxTotalString());
 	}
 	
 	@Test
@@ -94,7 +94,7 @@ public class TestCart {
 		cart.deleteLastCartItem();
 		cart.calculatePreTaxTotal();
 		
-		assertEquals("1.99", cart.getPreTaxTotal());
+		assertEquals("1.99", cart.getPreTaxTotalString());
 	}
 
 	@Test
@@ -109,7 +109,7 @@ public class TestCart {
 		
 		assertAll("cart",
 			() -> assertEquals(2, cart.getCartItems().size()),
-			() -> assertEquals("3.98", cart.getPreTaxTotal())
+			() -> assertEquals("3.98", cart.getPreTaxTotalString())
 		);
 	}
 	
@@ -124,7 +124,7 @@ public class TestCart {
 		cart.addCartItem(cartItem3); // Sale Price of 0.99
 		cart.calculatePreTaxTotal();
 		
-		assertEquals("2.98", cart.getPreTaxTotal());
+		assertEquals("2.98", cart.getPreTaxTotalString());
 	}
 	
 	@Test
@@ -138,7 +138,7 @@ public class TestCart {
 		cart.addCartItem(cartItem4);
 		cart.calculatePreTaxTotal();
 		
-		assertEquals("15.00", cart.getPreTaxTotal());
+		assertEquals("15.00", cart.getPreTaxTotalString());
 	}
 	
 	@Test
@@ -152,7 +152,7 @@ public class TestCart {
 		cart.addCartItem(cartItem4);
 		cart.calculatePreTaxTotal();
 		
-		assertEquals("10.00", cart.getPreTaxTotal());
+		assertEquals("10.00", cart.getPreTaxTotalString());
 	}
 	
 	@Test
@@ -200,7 +200,7 @@ public class TestCart {
 		
 		cart.calculatePreTaxTotal();
 		
-		assertEquals("6.00", cart.getPreTaxTotal());
+		assertEquals("6.00", cart.getPreTaxTotalString());
 	}
 	
 	@Test
@@ -234,7 +234,7 @@ public class TestCart {
 		
 		cart.calculatePreTaxTotal();
 		
-		assertEquals("27.96", cart.getPreTaxTotal());
+		assertEquals("27.96", cart.getPreTaxTotalString());
 	}
 	
 	@Test
@@ -254,7 +254,7 @@ public class TestCart {
 		
 		cart.calculatePreTaxTotal();
 		
-		assertEquals("6.99", cart.getPreTaxTotal());
+		assertEquals("6.99", cart.getPreTaxTotalString());
 	}
 	
 	@Test
@@ -286,7 +286,7 @@ public class TestCart {
 		
 		cart.calculatePreTaxTotal();
 		
-		assertEquals("15.92", cart.getPreTaxTotal());	
+		assertEquals("15.92", cart.getPreTaxTotalString());	
 	}
 	
 	@Test
@@ -313,7 +313,7 @@ public class TestCart {
 		
 		cart.calculatePreTaxTotal();
 		// should be 1.96 off
-		assertEquals("11.97", cart.getPreTaxTotal());
+		assertEquals("11.97", cart.getPreTaxTotalString());
 	}
 	
 	@Test
@@ -333,12 +333,12 @@ public class TestCart {
 		
 		cart.calculatePreTaxTotal();
 		
-		assertEquals("4.99", cart.getPreTaxTotal());
+		assertEquals("4.99", cart.getPreTaxTotalString());
 		
 		cart.deleteCartItem(cartItem4);
 		cart.calculatePreTaxTotal();
 		
-		assertEquals("5.97", cart.getPreTaxTotal());
+		assertEquals("5.97", cart.getPreTaxTotalString());
 	}
 	
 	@Test
@@ -358,12 +358,12 @@ public class TestCart {
 		
 		cart.calculatePreTaxTotal();
 		
-		assertEquals("4.99", cart.getPreTaxTotal());
+		assertEquals("4.99", cart.getPreTaxTotalString());
 		
 		cart.deleteLastCartItem();
 		cart.calculatePreTaxTotal();
 		
-		assertEquals("5.97", cart.getPreTaxTotal());
+		assertEquals("5.97", cart.getPreTaxTotalString());
 	}
 	
 	@Test
@@ -385,7 +385,7 @@ public class TestCart {
 		
 		cart.calculatePreTaxTotal();
 		
-		assertEquals("4.50", cart.getPreTaxTotal());
+		assertEquals("4.50", cart.getPreTaxTotalString());
 	}
 	
 	@Test
@@ -408,12 +408,12 @@ public class TestCart {
 				cart.addCartItem(cartItem6);
 				
 				cart.calculatePreTaxTotal();
-				assertEquals("5.00", cart.getPreTaxTotal());
+				assertEquals("5.00", cart.getPreTaxTotalString());
 				
 				cart.deleteLastCartItem();
 				cart.calculatePreTaxTotal();
 				
-				assertEquals("4.50", cart.getPreTaxTotal());
+				assertEquals("4.50", cart.getPreTaxTotalString());
 	}
 	
 } // End TestCart()
