@@ -2,7 +2,6 @@ package com.pillartechnology.checkoutorderkata.discounts;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-
 import com.pillartechnology.checkoutorderkata.entity.Item;
 
 /**
@@ -24,7 +23,7 @@ public class BuyNGetMatXPercentOff extends Special{
 	 * discount for a given Item in the cart that is on special.
 	 * @param item an item object in the cart that has a special.
 	 * @param itemBuyCount is the number of items of type item in the cart on special.
-	 * @return The total calculated decimal amount as a Big Decimal.
+	 * @return The total calculated discount amount as a Big Decimal.
 	 */
 	@Override
 	public BigDecimal calculateDiscountAmount(Item item, int itemBuyCount) {
@@ -44,7 +43,7 @@ public class BuyNGetMatXPercentOff extends Special{
 			// Special Applies; adjust items remaining first
 			itemsRemaining = itemsRemaining - buyQtyRequirement;
 			
-			// Calculate discounted unit price * item default/ sale price
+			// Calculate discounted unit sell price = sale price * discount percentage
 			BigDecimal discountedUnitSalePrice = item.getSalePrice()
 					.multiply(new BigDecimal(this.getDiscountPercentage()/100));
 
@@ -61,6 +60,50 @@ public class BuyNGetMatXPercentOff extends Special{
 		return discountAmount.setScale(2, RoundingMode.HALF_UP);
 	}
 
+	/**
+	 * Returns a BigDecimal representing the total calculated
+	 * discount for a given item's weight in the cart that is
+	 * on special. Total weight of all items is considered and 
+	 * each iteration removes the purchased amount at regular 
+	 * price and then the purchased amount at discounted price.
+	 * @param item The item the special is being applied to.
+	 * @param itemWeightCount The total weight of all same items.
+	 * @return
+	 */
+	public BigDecimal calculateDiscountAmountCBW(Item item, double itemWeightCount) {
+		BigDecimal discountAmount = new BigDecimal("0.00");
+		double buyQtyRequirement = this.getBuyQtyRequirement();
+		double itemsWeightRemaining = itemWeightCount;
+		double receiveDiscountOnWeight = this.getReceiveQtyItems();
+		
+		if (this.getLimit() > 0) {
+			itemsWeightRemaining = this.getLimit();
+		}
+		
+		while(itemsWeightRemaining >= buyQtyRequirement) {
+			BigDecimal amountToAddToDiscount = new BigDecimal("0.0");
+			
+			// Special Applies, adjust remaining weight first
+			itemsWeightRemaining = itemsWeightRemaining - buyQtyRequirement;
+			
+			// Calculate discounted unit price = sale price * discounted percentage
+			BigDecimal discountedUnitSalePrice = item.getSalePrice()
+					.multiply(new BigDecimal(this.getDiscountPercentage()/100));
+			
+			// Calculate the amount to add to the total discount amount
+			amountToAddToDiscount = discountedUnitSalePrice
+					.multiply(new BigDecimal(receiveDiscountOnWeight));
+			
+			/* Add the calculated amount and adjust the items remaining by items 
+			 * purchased at discount.
+			 */
+			discountAmount = discountAmount.add(amountToAddToDiscount);
+			itemsWeightRemaining = itemsWeightRemaining - receiveDiscountOnWeight;
+		} // End while
+		
+		return discountAmount.setScale(2, RoundingMode.HALF_UP);
+	}
+	
 	@Override
 	public String toString() {
 		int buyQty = this.getBuyQtyRequirement();
@@ -76,8 +119,6 @@ public class BuyNGetMatXPercentOff extends Special{
 			return "Buy " + buyQty + " get " + this.getReceiveQtyItems() 
 				+ " free";
 		}
-		
-		
 		
 		return "Buy " + buyQty + " " + itemOrItems + ", get " 
 			+ this.receiveQtyItems + " at " + percentOff

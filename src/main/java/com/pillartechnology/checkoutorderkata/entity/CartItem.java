@@ -83,6 +83,19 @@ public class CartItem {
 			}	
 		}
 	}
+	
+	@Override 
+	public String toString() {
+		String itemName = this.getItem().getName();
+		boolean isChargeByWeight = this.getItem().isChargeByWeight();
+		String weight = "";
+		
+		if (isChargeByWeight) {
+			weight = ", weight=" + this.getWeight().toString();
+		}
+		
+		return "CartItem [name=" + itemName + weight + ", sellPrice=" + this.sellPrice + "]";
+	}
 
 
 } // End CartItem()

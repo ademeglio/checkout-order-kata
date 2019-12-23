@@ -3,14 +3,11 @@ package com.pillartechnology.checkoutorderkata;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.math.BigDecimal;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.pillartechnology.checkoutorderkata.discounts.BuyNForX;
 import com.pillartechnology.checkoutorderkata.discounts.BuyNGetMatXPercentOff;
-import com.pillartechnology.checkoutorderkata.entity.Cart;
-import com.pillartechnology.checkoutorderkata.entity.CartItem;
 import com.pillartechnology.checkoutorderkata.entity.Item;
 
 @SpringBootTest
@@ -97,33 +94,19 @@ public class TestSpecial {
 	
 	@Test
 	public void shouldReturnDiscountedAmountBuyNGetMOfEqualOrLesserValueForXPercentOff() {
-		Cart cart = new Cart();
-		// "Buy N, get M of equal or lesser value for %X off" on weighted items.
 		// "Buy 2 pounds of ground beef, get 1 pound half off."
-		BuyNChargeByWeightGetMatXPercentOff special3 = new BuyNChargeByWeightGetMatXPercentOff(2,1,50);
+		BuyNGetMatXPercentOff special3 = new BuyNGetMatXPercentOff(2,1,50.00);
 		
-		Item item4 = new Item("Steak", "3.00", true);
+		Item item4 = new Item("Ground Beef", "3.00", true);
 		item4.addSpecial(special3);
 		
-		// TODO: New special should use a CartItem and maybe cartItems so that we loop
-		// through the array and for each special of this type, add them.
-		// Maybe needs a map?
+		// Assume 1 cart item weighs 2lb, 1 @ 1lb, 1 @ 2lb
+		double itemsWeightCount = 5.0;
 		
-		int itemBuyCount = 2;
-		
-		BigDecimal discountAmount = special3.calculateDiscountAmount(cartItems, itemBuyCount);
-		
-//		CartItem cartItem3 = new CartItem(item4, 2.00);
-//		CartItem cartItem4 = new CartItem(item4, 1.00);
-//		
-//		cart.addCartItem(cartItem3); // Steak, 2#, $6.00
-//		cart.addCartItem(cartItem4); // Steak, 1#, $3.00; $1.50 after special
-//		cart.calculatePreTaxTotal();
-		
-		assertEquals("7.50", discountAmount.toString());
+		BigDecimal discountAmount = special3.calculateDiscountAmountCBW(item4, itemsWeightCount);
 	
-		
-		
+		assertEquals("3.00", discountAmount.toString());
+
 	}
 	
 } // End TestSpecial();
