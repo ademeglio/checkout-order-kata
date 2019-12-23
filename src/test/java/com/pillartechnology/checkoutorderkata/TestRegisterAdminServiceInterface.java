@@ -2,10 +2,13 @@ package com.pillartechnology.checkoutorderkata;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.pillartechnology.checkoutorderkata.entity.Item;
 import com.pillartechnology.checkoutorderkata.service.RegisterAdminService;
 
 @SpringBootTest
@@ -44,6 +47,15 @@ public class TestRegisterAdminServiceInterface {
 		registerAdminService.createMarkdown("$1.00 OFF", "1.00");
 		
 		assertEquals("$1.00 off", registerAdminService.getMarkdown("$1.00 OFF").getDescription().toLowerCase());
+	}
+	
+	@Test
+	public void shouldProvideListOfInventory() {
+		registerAdminService.createItem("test2", "2.00", false);
+		registerAdminService.createItem("test1", "1.00", false);
+		
+		ArrayList<Item> inventory = new ArrayList<Item>(registerAdminService.getInventory());
+		assertEquals(false, inventory.isEmpty());
 	}
 	
 } //EndTestAdminRegisterInterface

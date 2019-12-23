@@ -1,5 +1,8 @@
 package com.pillartechnology.checkoutorderkata.service;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -79,6 +82,17 @@ public class RegisterAdminServiceImpl implements RegisterAdminService {
 			return markdown;
 		}
 		return markdown;
+	}
+
+	@Override
+	public Collection<Item> getInventory() {
+		ArrayList<Item> items = new ArrayList<Item>(INVENTORY.values());
+		
+		Comparator<Item> compareByName = (Item o1, Item o2) ->
+			o1.getName().compareTo(o2.getName());
+		items.sort(compareByName);
+
+		return items;
 	}
 
 	

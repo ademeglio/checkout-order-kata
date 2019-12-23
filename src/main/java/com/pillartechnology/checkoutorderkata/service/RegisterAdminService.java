@@ -1,5 +1,6 @@
 package com.pillartechnology.checkoutorderkata.service;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 import com.pillartechnology.checkoutorderkata.discounts.Markdown;
@@ -34,6 +35,8 @@ public interface RegisterAdminService {
 	void createMarkdown(String description, String markdownAmount);
 
 	Markdown getMarkdown(String markdownDescription);
+
+	Collection<Item> getInventory();
 	
 
 } // End RegisterAdminService()
