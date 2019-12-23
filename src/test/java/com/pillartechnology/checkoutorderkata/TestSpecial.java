@@ -105,7 +105,7 @@ public class TestSpecial {
 		
 		BigDecimal discountAmount = special3.calculateDiscountAmountCBW(item4, itemsWeightCount);
 	
-		assertEquals("3.00", discountAmount.toString());
+		assertEquals("1.50", discountAmount.toString());
 
 	}
 	

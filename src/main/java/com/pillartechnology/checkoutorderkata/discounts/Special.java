@@ -49,6 +49,8 @@ public abstract class Special {
 	/* methods */
 	
 	public abstract BigDecimal calculateDiscountAmount(Item item, int itemBuyCount);
+
+	public abstract BigDecimal calculateDiscountAmountCBW(Item item, Double itemWeightCount);
 	
 	
 } // End Special()

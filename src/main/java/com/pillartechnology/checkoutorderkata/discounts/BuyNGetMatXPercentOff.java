@@ -70,7 +70,8 @@ public class BuyNGetMatXPercentOff extends Special{
 	 * @param itemWeightCount The total weight of all same items.
 	 * @return
 	 */
-	public BigDecimal calculateDiscountAmountCBW(Item item, double itemWeightCount) {
+	@Override
+	public BigDecimal calculateDiscountAmountCBW(Item item, Double itemWeightCount) {
 		BigDecimal discountAmount = new BigDecimal("0.00");
 		double buyQtyRequirement = this.getBuyQtyRequirement();
 		double itemsWeightRemaining = itemWeightCount;
@@ -80,12 +81,12 @@ public class BuyNGetMatXPercentOff extends Special{
 			itemsWeightRemaining = this.getLimit();
 		}
 		
-		while(itemsWeightRemaining >= buyQtyRequirement) {
+		while(itemsWeightRemaining > buyQtyRequirement) {
 			BigDecimal amountToAddToDiscount = new BigDecimal("0.0");
 			
 			// Special Applies, adjust remaining weight first
 			itemsWeightRemaining = itemsWeightRemaining - buyQtyRequirement;
-			
+
 			// Calculate discounted unit price = sale price * discounted percentage
 			BigDecimal discountedUnitSalePrice = item.getSalePrice()
 					.multiply(new BigDecimal(this.getDiscountPercentage()/100));

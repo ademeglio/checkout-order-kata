@@ -25,6 +25,9 @@ public class Cart {
 	private List<CartItem> cartItems = new ArrayList<CartItem>();
 	private BigDecimal preTaxTotal = new BigDecimal("0.00");
 	private Map<Item, Integer> itemsOnSpecial = new HashMap<Item, Integer>();
+	
+	// Items on special that are Charge By Weight(CBW)
+	private Map<Item, Double> itemsOnSpecialCBW = new HashMap<Item, Double>();
 
 	// Default Constructor
 	public Cart() {}
@@ -61,14 +64,14 @@ public class Cart {
 	 */
 	public void addCartItem(CartItem cartItem) {
 		cartItems.add(cartItem);
+		Item item = cartItem.getItem();
 		
 		if (isEmpty) {
 			this.isEmpty = false;
 		}
 		
 		// Track number of items that are on special
-		if (cartItem.getItem().hasSpecial()) {
-			Item item = cartItem.getItem();
+		if (item.hasSpecial() && item.isChargeByWeight() == false) {
 			Integer itemCount = 0;
 			
 			if (itemsOnSpecial.containsKey(item)) {
@@ -78,28 +81,52 @@ public class Cart {
 				this.itemsOnSpecial.put(item, 1);
 			}
 		}
+		
+		if (item.hasSpecial() && item.isChargeByWeight()) {
+			Double itemWeight = 0.0;
+			
+			if (itemsOnSpecialCBW.containsKey(item)) {
+				itemWeight = itemsOnSpecialCBW.get(item);
+				itemsOnSpecialCBW.put(item, itemWeight + cartItem.getWeight());
+			} else {
+				this.itemsOnSpecialCBW.put(item, cartItem.getWeight());
+			}
+		}
 	}
 
 	public void deleteLastCartItem() {
 		int indexOfLast = cartItems.size() - 1;
+		CartItem cartItem = cartItems.get(indexOfLast);
 		Item item = cartItems.get(indexOfLast).getItem();
-		Integer itemCount = itemsOnSpecial.get(item);
-		cartItems.remove(indexOfLast);
+		Integer itemCount = 0;
+		Double itemsWeight = 0.0;
 		
-		if (item.hasSpecial()) {
-			itemsOnSpecial.put(item, itemCount - 1);
+		if (item.hasSpecial() && item.isChargeByWeight()) {
+			itemsWeight = itemsOnSpecialCBW.get(item);
+			itemsOnSpecialCBW.put(item, itemsWeight - cartItem.getWeight());
+		} else if (item.hasSpecial() && item.isChargeByWeight() == false) {
+			itemCount = itemsOnSpecial.get(item);
+			itemsOnSpecial.put(item, itemCount - 1);			
 		}
+		
+		cartItems.remove(indexOfLast);
 	}
 	
 	public void deleteCartItem(CartItem cartItem) {
 		Item item = cartItem.getItem();
-		cartItems.remove(cartItem);
-		Integer itemCount = itemsOnSpecial.get(item);
+		Integer itemCount = 0; 
+		Double itemsWeight = 0.0;
 		
 		// remove item from itemsOnSpecial if applicable
-		if (item.hasSpecial()) {
+		if (item.hasSpecial() && item.isChargeByWeight()) {
+			itemsWeight = itemsOnSpecialCBW.get(item);
+			itemsOnSpecialCBW.put(item, itemsWeight - cartItem.getWeight());
+		} else if (item.hasSpecial() && item.isChargeByWeight() == false) {
+			itemCount = itemsOnSpecial.get(item);
 			itemsOnSpecial.put(item, itemCount - 1);
 		}
+		
+		cartItems.remove(cartItem);
 	}
 
 	/**
@@ -146,8 +173,9 @@ public class Cart {
 	 * may be applied.
 	 */
 	public void adjustForSpecials() {
-		// Instance Variables
+		// Local Variables
 		BigDecimal specialDiscountAmount = new BigDecimal(0.0);
+		
 		/* Get List of Specials to iterate through, log if
 		 * there aren't any for trouble shooting. 
 		 */
@@ -160,22 +188,43 @@ public class Cart {
 				int itemBuyCount = value.getValue();
 				Special special = item.getSpecial();
 				
-				/* Need a reference to the CartItem.getItem() to get the special
-				 * to apply for each item on special
-				 */
-				logger.info("The following item is on special: " 
+				logger.info("The following non-cbw item is on special: " 
 						+ item.getName() + ", " 
 						+ special.toString());
-
+				
 				/* Then process the sellPrice against the special, for
 				 * example Buy N Get M at X Percent Off. We need the
 				 * total amount to subtract from the pretax total
 				 */
-				
 				specialDiscountAmount = special.calculateDiscountAmount(item, itemBuyCount);
 			}
+			this.preTaxTotal = preTaxTotal.subtract(specialDiscountAmount);	
+		}
 		
-		this.preTaxTotal = preTaxTotal.subtract(specialDiscountAmount);	
+		/* Get List of specials for items that are charge by weight
+		 * to iterate through, log if there aren't any for trouble shooting.
+		 */
+		
+		if (itemsOnSpecialCBW.isEmpty()) {
+			logger.info("No specials on CBW items that are charge by weight to calculate");
+		} else {
+			for (Map.Entry<Item, Double> value : itemsOnSpecialCBW.entrySet()) {
+				Item item = value.getKey();
+				Double itemWeightCount = value.getValue();
+				Special special = item.getSpecial();
+				
+				logger.info("The following CBW item is on special: "
+						+ item.getName() + ", "
+						+ special.toString());
+				
+				/* Then process the sellPrice against the special, for
+				 * example Buy N Get M at X Percent Off. We need the
+				 * total amount to subtract from the pre-tax total
+				 * calculateDiscountAmountCBW(Item item, double itemWeightCount)
+				 */
+				specialDiscountAmount = special.calculateDiscountAmountCBW(item, itemWeightCount);
+			}
+			this.preTaxTotal = preTaxTotal.subtract(specialDiscountAmount);	
 		}
 	}
 	

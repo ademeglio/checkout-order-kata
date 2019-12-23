@@ -70,6 +70,12 @@ public class BuyNForX extends Special{
 	}
 	
 	@Override
+	public BigDecimal calculateDiscountAmountCBW(Item item, Double itemWeightCount) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
 	public String toString() {
 		int buyQty = this.getBuyQtyRequirement();
 		String addLimit = this.getLimit() > 0
