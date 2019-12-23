@@ -99,4 +99,17 @@ public class TestRegisterAdminServiceInterface {
 				() -> assertEquals("$1.00 OFF", item.getMarkdown().getDescription()),
 				() -> assertEquals("2 For $5.00", item.getSpecial().getName()));
 	}
+	
+	@Test
+	public void shouldUpdateItemWhenAddingSpecialOnly() {
+		registerAdminService.createItem("test2", "2.00", false);
+		registerAdminService.createSpecialBuyNForX("2 For $5.00", 2, "5.00");
+		
+		Item item = registerAdminService.getItem("test2");
+		
+		// Update Price, add Markdown, add Special
+		registerAdminService.updateItem("test2", "", null, "2 for $5.00");
+		
+		assertEquals("2 For $5.00", item.getSpecial().getName());
+	}
 } //EndTestAdminRegisterInterface

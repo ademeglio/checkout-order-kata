@@ -57,6 +57,7 @@ public class Item {
 	
 	public void setDefaultPrice(String defaultPrice) {
 		this.defaultPrice = new BigDecimal(defaultPrice);
+		this.salePrice = new BigDecimal(defaultPrice);
 	}
 
 	public boolean isChargeByWeight() {

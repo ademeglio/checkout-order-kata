@@ -135,11 +135,11 @@ public class RegisterAdminServiceImpl implements RegisterAdminService {
 		
 		if (item != null) {
 			
-			if (newDefaultPrice != null || newDefaultPrice != "") {
+			if (newDefaultPrice != null && !newDefaultPrice.isEmpty()) {
 				item.setDefaultPrice(newDefaultPrice);
 			}
 			
-			if (markdownDescription != null || markdownDescription != "") {
+			if (markdownDescription != null && !markdownDescription.isEmpty()) {
 				try {
 					markdown = MARKDOWNS.get(markdownDescription);
 				} catch (Exception e) {
@@ -149,7 +149,7 @@ public class RegisterAdminServiceImpl implements RegisterAdminService {
 				item.addMarkdown(markdown);
 			}
 			
-			if (specialName != null || specialName != "") {
+			if (specialName != null && !specialName.isEmpty()) {
 				try {
 					special = SPECIALS.get(specialName);
 				} catch (Exception e) {
