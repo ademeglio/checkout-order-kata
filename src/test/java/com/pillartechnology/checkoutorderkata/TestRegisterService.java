@@ -31,6 +31,7 @@ public class TestRegisterService {
 	@BeforeEach
 	public void setup() {
 		// Create Specials, Markdown, and Items for testing 
+		registerService.initiateCart();
 		registerAdminService.createSpecialBuyNForX("2 For $2.00", 2, "2.00");
 		
 		registerAdminService.createMarkdown("$0.25 OFF", "0.25");
@@ -42,14 +43,22 @@ public class TestRegisterService {
 	
 	@Test
 	public void shouldInitiateAnCartAndReturnPreTaxTotalOfZero() {
-		registerService.initiateCart();
+		assertEquals("0.00", registerService.getPreTaxCartTotal(0).toString());
+	}
+	
+	@Test
+	public void shouldClearCartOfAllItems() {
+		registerService.scanItem(0, "beans", 0);// $2.00
+		registerService.scanItem(0, "Chile", 0);// $1.50
+		
+		registerService.clearCart(0);
 		
 		assertEquals("0.00", registerService.getPreTaxCartTotal(0).toString());
 	}
 	
 	@Test
 	public void shouldReturnUpdatedTotalAfterAddingItemsToCart() {
-		registerService.initiateCart();
+		registerService.clearCart(0);
 		
 		registerService.scanItem(0, "beans", 0);// $2.00
 		registerService.scanItem(0, "Chile", 0);// $1.50
@@ -61,7 +70,8 @@ public class TestRegisterService {
 	
 	@Test
 	public void shouldRemoveLastItemAndUpdateCartTotal() {
-		registerService.initiateCart();
+		registerService.clearCart(0);
+		
 		registerService.scanItem(0, "beans", 0);// $2.00
 		registerService.scanItem(0, "Chile", 0);// $1.50
 		registerService.scanItem(0, "apple", 5.0); // $2.50
@@ -71,5 +81,16 @@ public class TestRegisterService {
 		assertEquals("3.50", registerService.getPreTaxCartTotal(0).toString());
 	}
 	
-	
+	@Test
+	public void shouldRemoveScannedItemAndUpdateCartTotal() {
+		registerService.clearCart(0);
+		
+		registerService.scanItem(0, "beans", 0);// $2.00
+		registerService.scanItem(0, "Chile", 0);// $1.50
+		registerService.scanItem(0, "apple", 5.0); // $2.50
+		
+		registerService.removeScannedItem(0, "chile");
+		
+		assertEquals("4.50", registerService.getPreTaxCartTotal(0).toString());
+	}
 } // End TestRegisterService()

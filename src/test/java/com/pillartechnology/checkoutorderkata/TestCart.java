@@ -104,7 +104,9 @@ public class TestCart {
 		cart.addCartItem(cartItem2); // Bread w/ unit price of $1.99
 		cart.calculatePreTaxTotal();
 		
-		cart.deleteCartItem(cartItem1);
+		String itemName = cartItem1.getName();
+		
+		cart.deleteCartItem(itemName);
 		cart.calculatePreTaxTotal();
 		
 		assertAll("cart",
@@ -335,7 +337,7 @@ public class TestCart {
 		
 		assertEquals("4.99", cart.getPreTaxTotalString());
 		
-		cart.deleteCartItem(cartItem4);
+		cart.deleteCartItem("Soup");
 		cart.calculatePreTaxTotal();
 		
 		assertEquals("5.97", cart.getPreTaxTotalString());

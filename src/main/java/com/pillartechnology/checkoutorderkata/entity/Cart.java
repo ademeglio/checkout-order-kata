@@ -3,6 +3,7 @@ package com.pillartechnology.checkoutorderkata.entity;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +44,14 @@ public class Cart {
 		return cartItems;
 	}
 	
+	public Map<Item, Integer> getItemsOnSpecial() {
+		return itemsOnSpecial;
+	}
+	
+	public Map<Item, Double> getItemsOnSpecialCBW() {
+		return itemsOnSpecialCBW;
+	}
+	
 	public BigDecimal getPreTaxTotal() {
 		return preTaxTotal;
 	}
@@ -55,6 +64,7 @@ public class Cart {
 		int index = cartItems.lastIndexOf(cartItem);
 		return cartItems.get(index);
 	}
+	 
 	
 	/* Methods */
 	
@@ -116,10 +126,23 @@ public class Cart {
 		cartItems.remove(indexOfLast);
 	}
 	
-	public void deleteCartItem(CartItem cartItem) {
-		Item item = cartItem.getItem();
+	public void deleteCartItem(String itemName) {
+		CartItem cartItem = null;
+		Item item = null;
+		
 		Integer itemCount = 0; 
 		Double itemsWeight = 0.0;
+		
+		Iterator<CartItem> cartIterator = cartItems.iterator();
+		
+		while (cartIterator.hasNext()) {
+			cartItem = cartIterator.next();
+			if (cartItem.getName().equalsIgnoreCase(itemName)) {
+				break;
+			}
+		}
+		
+		item = cartItem.getItem();
 		
 		// remove item from itemsOnSpecial if applicable
 		if (item.hasSpecial() && item.isChargeByWeight()) {

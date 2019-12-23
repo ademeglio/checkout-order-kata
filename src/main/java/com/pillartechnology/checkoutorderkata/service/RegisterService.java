@@ -22,5 +22,9 @@ public interface RegisterService {
 	void scanItem(Integer cartIdNo, String itemName, double weight);
 
 	void removeLastItemScanned(Integer cartIdNo);
+	
+	void removeScannedItem(Integer cartIdNo, String itemName);
+
+	void clearCart(Integer cartIdNo);
 
 } // End RegisterService()

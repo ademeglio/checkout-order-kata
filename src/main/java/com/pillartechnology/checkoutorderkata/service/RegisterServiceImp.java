@@ -84,6 +84,23 @@ public class RegisterServiceImp implements RegisterService {
 		cart.calculatePreTaxTotal();
 	}
 	
+	@Override
+	public void removeScannedItem(Integer cartIdNo, String itemName) {
+		Cart cart = this.getCart(cartIdNo);
+		
+		cart.deleteCartItem(itemName);
+		cart.calculatePreTaxTotal();
+	}
+	
+	@Override
+	public void clearCart(Integer cartIdNo) {
+		Cart cart = this.getCart(cartIdNo);
+		cart.getCartItems().clear();
+		cart.getItemsOnSpecial().clear();
+		cart.getItemsOnSpecialCBW().clear();
+		cart.calculatePreTaxTotal();
+	}
+	
 	
 	/* OTHER METHODS */
 	private void addCart(Cart cart) {
