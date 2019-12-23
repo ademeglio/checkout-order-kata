@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.pillartechnology.checkoutorderkata.discounts.BuyNForX;
+import com.pillartechnology.checkoutorderkata.discounts.BuyNGetMatXPercentOff;
 import com.pillartechnology.checkoutorderkata.discounts.Special;
 import com.pillartechnology.checkoutorderkata.entity.Item;
 
@@ -26,7 +27,7 @@ public class RegisterAdminServiceImpl implements RegisterAdminService {
 		Item item = INVENTORY.get(itemName.toLowerCase());
 		
 		if (item == null) {
-			logger.warn("Sorry, " + itemName + " cannot be found.");
+			logger.error("Sorry, " + itemName + " cannot be found.");
 			return item;
 		}
 		return item;
@@ -34,24 +35,33 @@ public class RegisterAdminServiceImpl implements RegisterAdminService {
 
 	@Override
 	public void createSpecialBuyNForX(String specialName, int buyQtyRequirement, String discountPrice) {
-		BuyNForX buyNForX = new BuyNForX(buyQtyRequirement, discountPrice);
-		buyNForX.setName(specialName);
+		BuyNForX special = new BuyNForX(buyQtyRequirement, discountPrice);
+		special.setName(specialName);
 		
-		SPECIALS.put(specialName.toLowerCase(), buyNForX);
+		SPECIALS.put(specialName.toLowerCase(), special);
 	}
 
+	@Override
+	public void createSpecialBuyNGetMAtXPercentOff(String specialName, int buyQtyRequirement, int receiveQtyItems,
+			double percentOff) {
+		BuyNGetMatXPercentOff special = new BuyNGetMatXPercentOff(buyQtyRequirement,
+				receiveQtyItems, percentOff);
+		special.setName(specialName);
+		
+		SPECIALS.put(specialName.toLowerCase(), special);
+	}
+	
 	@Override
 	public Special getSpecial(String specialName) {
 		Special special = SPECIALS.get(specialName.toLowerCase());
 		
 		if (special == null) {
-			logger.warn("Sorry, " + specialName + " cannot be found.");
+			logger.error("Sorry, " + specialName + " cannot be found.");
 			return special;
 		}
 		return special;
 	}
 
-	
 	
 
 } // End RegisterAdminServiceImpl()

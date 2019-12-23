@@ -24,7 +24,10 @@ public interface RegisterAdminService {
 
 	void createSpecialBuyNForX(String specialName, int buyQtyRequirement, String discountPrice);
 
-	Special getSpecial(String specialName); 
+	void createSpecialBuyNGetMAtXPercentOff(String specialName, int buyQtyRequirement, 
+			int receiveQtyItems, double percentOff); 
+	
+	Special getSpecial(String specialName);
 	
 
 } // End RegisterAdminService()

@@ -32,5 +32,11 @@ public class TestRegisterAdminServiceInterface {
 		assertEquals("2 for $5.00", registerAdminService.getSpecial("2 for $5.00").getName().toLowerCase());
 	}
 
+	@Test
+	public void shouldCreateSpecialBuyNGetMAtXPercentOffAndAddToSpecials() {
+		registerAdminService.createSpecialBuyNGetMAtXPercentOff("Buy 2 get 1 half off", 2, 1, 50);
+		
+		assertEquals("buy 2 get 1 half off", registerAdminService.getSpecial("Buy 2 get 1 half off").getName().toLowerCase());
+	}
 	
 } //EndTestAdminRegisterInterface
