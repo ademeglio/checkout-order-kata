@@ -388,5 +388,32 @@ public class TestCart {
 		assertEquals("4.50", cart.getPreTaxTotal());
 	}
 	
+	@Test
+	public void shouldVoidSpecialForItemIsCBWIfDeletingLastItemOnSpecialBuyNGetMForXPercent() {
+		// "Buy 2 pounds of ground beef, get 1 pound half off."
+				BuyNGetMatXPercentOff special3 = new BuyNGetMatXPercentOff(2,1,50);
+				
+				Item item6 = new Item("Ground Beef", "1.00", true);
+				item6.addSpecial(special3);
+				
+				// Create Cart Items
+				CartItem cartItem3 = new CartItem(item6, 2.0); // Ground Beef $2.00
+				CartItem cartItem4 = new CartItem(item6, 1.0); // Ground Beef $0.50
+				CartItem cartItem5 = new CartItem(item6, 2.0); // Ground Beef $2.00
+				CartItem cartItem6 = new CartItem(item6, 1.0); // Ground Beef $0.50
+				
+				cart.addCartItem(cartItem3);
+				cart.addCartItem(cartItem4);
+				cart.addCartItem(cartItem5);
+				cart.addCartItem(cartItem6);
+				
+				cart.calculatePreTaxTotal();
+				assertEquals("5.00", cart.getPreTaxTotal());
+				
+				cart.deleteLastCartItem();
+				cart.calculatePreTaxTotal();
+				
+				assertEquals("4.50", cart.getPreTaxTotal());
+	}
 	
 } // End TestCart()

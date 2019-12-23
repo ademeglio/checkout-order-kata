@@ -27,7 +27,7 @@ _TODO ADD INSTRUCTIONS BEFORE SENDING IN FOR REVIEW_
 - [x] Support a special in the form of "N for $X." For example, "3 for $5.00"
 - [x] Support a limit on specials, for example, "buy 2 get 1 free, limit 6" would prevent getting a third free item.
 - [x] Support removing a scanned item, keeping the total correct after possibly invalidating a special.
-- [ ] Support "Buy N, get M of equal or lesser value for %X off" on weighted items. For example, "Buy 2 pounds of ground beef, get 1 pound half off."
+- [x] Support "Buy N, get M of equal or lesser value for %X off" on weighted items. For example, "Buy 2 pounds of ground beef, get 1 pound half off."
 
 ## Notes
 
