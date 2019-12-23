@@ -39,4 +39,11 @@ public class TestRegisterAdminServiceInterface {
 		assertEquals("buy 2 get 1 half off", registerAdminService.getSpecial("Buy 2 get 1 half off").getName().toLowerCase());
 	}
 	
+	@Test
+	public void shouldCreateMarkdownAndAddToMarkdowns() {
+		registerAdminService.createMarkdown("$1.00 OFF", "1.00");
+		
+		assertEquals("$1.00 off", registerAdminService.getMarkdown("$1.00 OFF").getDescription().toLowerCase());
+	}
+	
 } //EndTestAdminRegisterInterface

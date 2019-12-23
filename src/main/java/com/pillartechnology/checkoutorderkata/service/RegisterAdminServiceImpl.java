@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.pillartechnology.checkoutorderkata.discounts.BuyNForX;
 import com.pillartechnology.checkoutorderkata.discounts.BuyNGetMatXPercentOff;
+import com.pillartechnology.checkoutorderkata.discounts.Markdown;
 import com.pillartechnology.checkoutorderkata.discounts.Special;
 import com.pillartechnology.checkoutorderkata.entity.Item;
 
@@ -60,6 +61,24 @@ public class RegisterAdminServiceImpl implements RegisterAdminService {
 			return special;
 		}
 		return special;
+	}
+
+	@Override
+	public void createMarkdown(String description, String markdownAmount) {
+		Markdown markdown = new Markdown(description, markdownAmount);
+		
+		MARKDOWNS.put(description.toLowerCase(),markdown);
+	}
+
+	@Override
+	public Markdown getMarkdown(String markdownDescription) {
+		Markdown markdown = MARKDOWNS.get(markdownDescription.toLowerCase());
+		
+		if (markdown == null) {
+			logger.error("Sorry, " + markdownDescription + " cannot be found.");
+			return markdown;
+		}
+		return markdown;
 	}
 
 	

@@ -2,6 +2,7 @@ package com.pillartechnology.checkoutorderkata.service;
 
 import java.util.HashMap;
 
+import com.pillartechnology.checkoutorderkata.discounts.Markdown;
 import com.pillartechnology.checkoutorderkata.discounts.Special;
 import com.pillartechnology.checkoutorderkata.entity.Item;
 
@@ -17,6 +18,7 @@ public interface RegisterAdminService {
 
 	HashMap<String, Item> INVENTORY = new HashMap<String, Item>();
 	HashMap<String, Special> SPECIALS = new HashMap<String, Special>();
+	HashMap<String, Markdown> MARKDOWNS = new HashMap<String, Markdown>();
 
 	void createItem(String itemName, String itemPrice, boolean isChargeByWeight);
 
@@ -28,6 +30,10 @@ public interface RegisterAdminService {
 			int receiveQtyItems, double percentOff); 
 	
 	Special getSpecial(String specialName);
+
+	void createMarkdown(String description, String markdownAmount);
+
+	Markdown getMarkdown(String markdownDescription);
 	
 
 } // End RegisterAdminService()
