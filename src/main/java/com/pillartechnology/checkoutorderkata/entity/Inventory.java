@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+// TODO - This class is destined for the garbage collector ;-)
 public  class Inventory {
 
 	private SortedSet<Item> items = Collections.synchronizedSortedSet(new TreeSet<Item>(Comparator.comparing(Item::getName)));
