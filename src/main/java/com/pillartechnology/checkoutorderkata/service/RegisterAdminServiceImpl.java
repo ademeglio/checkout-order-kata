@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.pillartechnology.checkoutorderkata.discounts.BuyNForX;
+import com.pillartechnology.checkoutorderkata.discounts.Special;
 import com.pillartechnology.checkoutorderkata.entity.Item;
 
 @Service
@@ -28,6 +30,25 @@ public class RegisterAdminServiceImpl implements RegisterAdminService {
 			return item;
 		}
 		return item;
+	}
+
+	@Override
+	public void createSpecialBuyNForX(String specialName, int buyQtyRequirement, String discountPrice) {
+		BuyNForX buyNForX = new BuyNForX(buyQtyRequirement, discountPrice);
+		buyNForX.setName(specialName);
+		
+		SPECIALS.put(specialName.toLowerCase(), buyNForX);
+	}
+
+	@Override
+	public Special getSpecial(String specialName) {
+		Special special = SPECIALS.get(specialName.toLowerCase());
+		
+		if (special == null) {
+			logger.warn("Sorry, " + specialName + " cannot be found.");
+			return special;
+		}
+		return special;
 	}
 
 	

@@ -25,5 +25,11 @@ public class TestRegisterAdminServiceInterface {
 		assertEquals("soup", registerAdminService.getItem("Soup").getName());
 	}
 	
+	@Test
+	public void shouldCreateSpecialBuyNForX() {
+		registerAdminService.createSpecialBuyNForX("2 For $5.00", 2, "5.00");
+		
+		assertEquals("2 for $5.00", registerAdminService.getSpecial("2 for $5.00").getName().toLowerCase());
+	}
 	
 } //EndTestAdminRegisterInterface

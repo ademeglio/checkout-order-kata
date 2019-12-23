@@ -17,6 +17,7 @@ public abstract class Special {
 	protected int receiveQtyItems;
 	protected double discountPercentage;
 	private int limit;
+	private String name;
 	
 	// Constructor
 	public Special(int buyQtyRequirement) {
@@ -45,6 +46,15 @@ public abstract class Special {
 	public void setLimit(int limit) {
 		this.limit = limit;
 	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String specialName) {
+		this.name = specialName;
+	}
+	
 	
 	/* methods */
 	
