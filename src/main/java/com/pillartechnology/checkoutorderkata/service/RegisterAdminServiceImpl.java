@@ -95,6 +95,17 @@ public class RegisterAdminServiceImpl implements RegisterAdminService {
 		return items;
 	}
 
+	@Override
+	public Collection<? extends Special> getSpecials() {
+		ArrayList<Special> specials = new ArrayList<Special>(SPECIALS.values());
+		
+		Comparator<Special> compareByName = (Special o1, Special o2) ->
+			o1.getName().compareTo(o2.getName());
+		specials.sort(compareByName);
+		
+		return specials;
+	}
+
 	
 
 } // End RegisterAdminServiceImpl()

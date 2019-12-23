@@ -37,6 +37,8 @@ public interface RegisterAdminService {
 	Markdown getMarkdown(String markdownDescription);
 
 	Collection<Item> getInventory();
+
+	Collection<? extends Special> getSpecials();
 	
 
 } // End RegisterAdminService()

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.pillartechnology.checkoutorderkata.discounts.Special;
 import com.pillartechnology.checkoutorderkata.entity.Item;
 import com.pillartechnology.checkoutorderkata.service.RegisterAdminService;
 
@@ -58,4 +59,14 @@ public class TestRegisterAdminServiceInterface {
 		assertEquals(false, inventory.isEmpty());
 	}
 	
+	@Test
+	public void shouldProvideListOfSpecials() {
+		registerAdminService.createSpecialBuyNGetMAtXPercentOff("Buy 2 get 1 half off", 2, 1, 50);
+		registerAdminService.createSpecialBuyNForX("2 For $5.00", 2, "5.00");
+
+		ArrayList<Special> specials = new ArrayList<Special>(registerAdminService.getSpecials());
+		
+		assertEquals(false, specials.isEmpty());
+		
+	}
 } //EndTestAdminRegisterInterface
