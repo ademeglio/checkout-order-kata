@@ -39,6 +39,8 @@ public interface RegisterAdminService {
 	Collection<Item> getInventory();
 
 	Collection<? extends Special> getSpecials();
+
+	Collection<Markdown> getMarkdowns();
 	
 
 } // End RegisterAdminService()

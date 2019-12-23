@@ -106,6 +106,17 @@ public class RegisterAdminServiceImpl implements RegisterAdminService {
 		return specials;
 	}
 
+	@Override
+	public Collection<Markdown> getMarkdowns() {
+		ArrayList<Markdown> markdowns = new ArrayList<Markdown>(MARKDOWNS.values());
+		
+		Comparator<Markdown> compareByDescription = (Markdown o1, Markdown o2) ->
+			o1.getDescription().compareTo(o2.getDescription());
+		markdowns.sort(compareByDescription);
+		
+		return markdowns;
+	}
+
 	
 
 } // End RegisterAdminServiceImpl()

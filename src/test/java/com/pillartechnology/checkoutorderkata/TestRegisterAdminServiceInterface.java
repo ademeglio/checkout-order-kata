@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.pillartechnology.checkoutorderkata.discounts.Markdown;
 import com.pillartechnology.checkoutorderkata.discounts.Special;
 import com.pillartechnology.checkoutorderkata.entity.Item;
 import com.pillartechnology.checkoutorderkata.service.RegisterAdminService;
@@ -68,5 +69,15 @@ public class TestRegisterAdminServiceInterface {
 		
 		assertEquals(false, specials.isEmpty());
 		
+	}
+	
+	@Test
+	public void shouldProvideListOfMarkdowns() {
+		registerAdminService.createMarkdown("$1.00 OFF", "1.00");
+		registerAdminService.createMarkdown("$2.00 OFF", "2.00");
+		
+		ArrayList<Markdown> markdowns = new ArrayList<Markdown>(registerAdminService.getMarkdowns());
+		
+		assertEquals(false, markdowns.isEmpty());
 	}
 } //EndTestAdminRegisterInterface
