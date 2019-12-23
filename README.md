@@ -10,10 +10,10 @@ _TODO ADD INSTRUCTIONS BEFORE SENDING IN FOR REVIEW_
 
 ## Requirements
 
-- [ ] API to configure
-  - [ ] Prices
-  - [ ] Specials
-  - [ ] Markdowns
+- [x] API to configure
+  - [x] Prices
+  - [x] Specials
+  - [x] Markdowns
 - [ ] Be able to accept scanned item or item & weight through an api call (while keeping accurate current total through the process).
 - [ ] Be able to remove items from an order, immediately correcting the current total.
 
