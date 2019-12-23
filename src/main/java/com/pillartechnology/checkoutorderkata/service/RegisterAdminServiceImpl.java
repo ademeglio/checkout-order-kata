@@ -117,6 +117,50 @@ public class RegisterAdminServiceImpl implements RegisterAdminService {
 		return markdowns;
 	}
 
+	@Override
+	public void updateItem(String itemName, String newDefaultPrice, 
+			String markdownDescription, String specialName) {
+		Item item = null;
+		Markdown markdown = null;
+		Special special = null;
+		
+		// Try and fetch item
+		try {
+			item = INVENTORY.get(itemName);
+		} catch (Exception e) {
+			logger.error("Sorry, " + itemName + " not found");
+			e.printStackTrace();
+		}
+		
+		
+		if (item != null) {
+			
+			if (newDefaultPrice != null || newDefaultPrice != "") {
+				item.setDefaultPrice(newDefaultPrice);
+			}
+			
+			if (markdownDescription != null || markdownDescription != "") {
+				try {
+					markdown = MARKDOWNS.get(markdownDescription);
+				} catch (Exception e) {
+					logger.error("Sorry, " + markdownDescription + " not found");
+					e.printStackTrace();
+				}
+				item.addMarkdown(markdown);
+			}
+			
+			if (specialName != null || specialName != "") {
+				try {
+					special = SPECIALS.get(specialName);
+				} catch (Exception e) {
+					logger.error("Sorry, " + specialName + " not found");
+					e.printStackTrace();
+				}
+				item.addSpecial(special);
+			}
+		}
+	}
+
 	
 
 } // End RegisterAdminServiceImpl()

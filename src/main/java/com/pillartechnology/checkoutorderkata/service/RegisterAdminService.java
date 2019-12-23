@@ -41,6 +41,9 @@ public interface RegisterAdminService {
 	Collection<? extends Special> getSpecials();
 
 	Collection<Markdown> getMarkdowns();
+
+	void updateItem(String itemName, String newDefaultPrice, String markdownDescription
+			, String specialName);
 	
 
 } // End RegisterAdminService()

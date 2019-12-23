@@ -1,5 +1,6 @@
 package com.pillartechnology.checkoutorderkata;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
@@ -79,5 +80,23 @@ public class TestRegisterAdminServiceInterface {
 		ArrayList<Markdown> markdowns = new ArrayList<Markdown>(registerAdminService.getMarkdowns());
 		
 		assertEquals(false, markdowns.isEmpty());
+	}
+	
+	@Test
+	public void shouldUpdateItemWhenAddingSpecialOrMarkdown() {
+		registerAdminService.createItem("test2", "2.00", false);
+		
+		Item item = registerAdminService.getItem("test2");
+		
+		registerAdminService.createMarkdown("$1.00 OFF", "1.00");
+		registerAdminService.createSpecialBuyNForX("2 For $5.00", 2, "5.00");
+		
+		// Update Price, add Markdown, add Special
+		registerAdminService.updateItem("test2", "2.50", "$1.00 off", "2 for $5.00");
+		
+		assertAll("item",
+				() -> assertEquals("2.50", item.getDefaultPrice().toString()),
+				() -> assertEquals("$1.00 OFF", item.getMarkdown().getDescription()),
+				() -> assertEquals("2 For $5.00", item.getSpecial().getName()));
 	}
 } //EndTestAdminRegisterInterface
