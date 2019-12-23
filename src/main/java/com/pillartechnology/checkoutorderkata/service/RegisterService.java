@@ -15,6 +15,12 @@ public interface RegisterService {
 	
 	void initiateCart();
 
-	BigDecimal getPreTaxCartTotal(int cartId);
+	Cart getCart(Integer cartIdNo);
+	
+	BigDecimal getPreTaxCartTotal(Integer cartIdNo);
+
+	void scanItem(Integer cartIdNo, String itemName, double weight);
+
+	void removeLastItemScanned(Integer cartIdNo);
 
 } // End RegisterService()

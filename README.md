@@ -14,12 +14,12 @@ _TODO ADD INSTRUCTIONS BEFORE SENDING IN FOR REVIEW_
   - [x] Prices
   - [x] Specials
   - [x] Markdowns
-- [ ] Be able to accept scanned item or item & weight through an api call (while keeping accurate current total through the process).
-- [ ] Be able to remove items from an order, immediately correcting the current total.
+- [x] Be able to accept scanned item or item & weight through an api call (while keeping accurate current total through the process).
+- [x] Be able to remove items from an order, immediately correcting the current total.
 
 ## Use Cases
 
-- [ ] You will need a way to configure the prices of scannable items prior to being scanned.
+- [x] You will need a way to configure the prices of scannable items prior to being scanned.
 - [x] Accept a scanned item. The total should reflect an increase by the per-unit price after the scan. 
 - [x] Accept a scanned item and a weight. The total should reflect an increase of the price of the item for the given weight.
 - [x] Support a markdown. A marked-down item will reflect the per-unit cost less the markdown when scanned. A weighted item with a markdown will reflect that reduction in cost per unit.
