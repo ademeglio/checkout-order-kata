@@ -9,6 +9,8 @@ import com.pillartechnology.checkoutorderkata.entity.Item;
  * which allows assigning different specials to items.
  *
  *@version 0.1.0
+ *@see BuyNForX
+ *@see 
  */
 public abstract class Special {
 	

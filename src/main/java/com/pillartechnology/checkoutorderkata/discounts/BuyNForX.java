@@ -7,9 +7,11 @@ import java.math.RoundingMode;
 import com.pillartechnology.checkoutorderkata.entity.Item;
 
 /**
- * BuyNForX extends Special() allowing to configure
+ * BuyNForX extends {@link Special}, allowing to configure
  * Buy N items for $x dollars.
  *
+ *@version 0.1.0
+ *@see 
  */
 public class BuyNForX extends Special{
 

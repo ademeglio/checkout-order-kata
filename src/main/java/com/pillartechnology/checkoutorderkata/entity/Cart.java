@@ -18,6 +18,7 @@ import com.pillartechnology.checkoutorderkata.discounts.Special;
  * every time a {@link CartItem} is added.
  *
  *@version 0.1.0
+ *@see CartItem
  */
 public class Cart {
 

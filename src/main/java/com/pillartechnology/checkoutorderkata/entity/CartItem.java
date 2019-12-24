@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
  * isChargeByWeight, stores that weight in this.</p>
  *
  *@version 0.1.0
+ *@see Item
+ *@see Cart
  */
 public class CartItem {
 

@@ -62,7 +62,7 @@ public class Item {
 	/* Constructors */
 	
 	/**
-	 * Constructor to create item without a price.
+	 * Class Constructor specifying name.
 	 * 
 	 * @param itemName name or description.
 	 */
@@ -71,7 +71,7 @@ public class Item {
 	}
 	
 	/**
-	 * Constructor to create item with a default price.
+	 * Class Constructor specifying name and default price.
 	 * 
 	 * @param itemName name or description.
 	 * @param defaultPrice base sell price.
@@ -83,7 +83,7 @@ public class Item {
 	}
 	
 	/**
-	 * Constructor to create item with a default price and setting item
+	 * Class Constructor specifying name, default price and setting
 	 * as a charge by weight item type.
 	 * 
 	 * @param itemName name or description.
