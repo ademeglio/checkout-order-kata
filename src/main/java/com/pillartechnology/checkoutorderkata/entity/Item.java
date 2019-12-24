@@ -11,32 +11,85 @@ import com.pillartechnology.checkoutorderkata.discounts.Special;
 /**
  * Item is the item that is being sold to the end user.
  * It stores various state information used by the application.
+ * 
+ * @version 0.1.0
  */
 public class Item {
 
 	Logger logger = LoggerFactory.getLogger(Item.class);
 	
 	private String name;
+	
+	/** 
+	 * Determines if this is billed by weight
+	 * instead of by unit.
+	 * <p>The item weight is stored when
+	 * adding the item to a {@link Cart}.
+	 */
 	private boolean isChargeByWeight;
+	
+	/** 
+	 * Initial price of this referenced when
+	 * removing a {@link Markdown}.
+	 */
 	private BigDecimal defaultPrice;
+	
+	/**
+	 * Determines if this has a {@link Markdown}
+	 * price applied.
+	 */
 	private boolean hasMarkdown;
+	/** {@link Markdown applied to this item.*/
 	private Markdown markdown;
+	
+	/**
+	 * Determines if this has a {@link Special}
+	 * such as <em>Buy n get m at x% off</em>. 
+	 */
 	private boolean hasSpecial;
+	/** {@link Special} applied to this item.*/
 	private Special special;
+	
+	/**
+	 * Adjusted sale price after applied
+	 * {@link Markdown}.
+	 * <p><b>Default = {@link defaultPrice}</b> if
+	 * there is no {@link Markdown} applied.
+	 */
 	private BigDecimal salePrice;
 
+	
 	/* Constructors */
+	
+	/**
+	 * Constructor to create item without a price.
+	 * 
+	 * @param itemName name or description.
+	 */
 	public Item(String itemName) {
 		this.name = itemName;
 	}
 	
+	/**
+	 * Constructor to create item with a default price.
+	 * 
+	 * @param itemName name or description.
+	 * @param defaultPrice base sell price.
+	 */
 	public Item(String itemName, String defaultPrice) {
 		this.name = itemName;
 		this.defaultPrice = new BigDecimal(defaultPrice);
 		this.salePrice = this.defaultPrice;
 	}
 	
-
+	/**
+	 * Constructor to create item with a default price and setting item
+	 * as a charge by weight item type.
+	 * 
+	 * @param itemName name or description.
+	 * @param defaultPrice base sell price.
+	 * @param isChargeByWeight true if item is charged by weight.
+	 */
 	public Item(String itemName, String defaultPrice, boolean isChargeByWeight) {
 		this.name = itemName;
 		this.defaultPrice = new BigDecimal(defaultPrice);
@@ -55,6 +108,12 @@ public class Item {
 		return defaultPrice;
 	}
 	
+	/**
+	 * Allows setting or resetting of default price. 
+	 * This will also reset the sale price.
+	 * 
+	 * @param defaultPrice
+	 */
 	public void setDefaultPrice(String defaultPrice) {
 		this.defaultPrice = new BigDecimal(defaultPrice);
 		this.salePrice = new BigDecimal(defaultPrice);
@@ -91,12 +150,24 @@ public class Item {
 	
 	/* Methods */
 
+	/**
+	 * Updates {@link Markdown} state and updates
+	 * the sale price set by {@link calculateSalePrice}.
+	 * <p>(<em>defaultPrice - Markdown.markdownAmount</em>).</p>
+	 * 
+	 * @param markdown is the {@link Markdown} to apply.
+	 */
 	public void addMarkdown(Markdown markdown) {
 		this.hasMarkdown = true;
 		this.markdown = markdown;
 		this.calculateSalePrice();
 	}
 
+	/**
+	 * Updates {@link Special} state.
+	 * 
+	 * @param special is the {@link Special} to apply.
+	 */
 	public void addSpecial(Special special) {
 		this.hasSpecial = true;
 		this.special = special;
@@ -104,11 +175,12 @@ public class Item {
 	
 	/**
 	 * Sale price is calculated whenever the item is created
-	 * with a default price. The initial sale price is set at
-	 * the default price unless there is a Markdown().
+	 * with a default price. The initial sale price is set equal
+	 * to the default price unless there is a {@link Markdown}.
 	 * 
-	 * <p>If there is a Markdown(), the sale price is calculated
-	 * by subtracting the markdown amount from the default price.
+	 * <p>If there is a {@link Markdown}, the sale price is calculated
+	 * by subtracting the {@link Markdown.markdownAmount} from 
+	 * the {@link defaultprice}.
 	 * </p>
 	 */
 	public void calculateSalePrice() {
