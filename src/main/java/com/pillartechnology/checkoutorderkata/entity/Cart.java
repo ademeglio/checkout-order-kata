@@ -14,9 +14,10 @@ import com.pillartechnology.checkoutorderkata.discounts.Special;
 
 /**
  * Cart allows tracking of items added to a cart
- * as a CartItem. The pre-tax total is calculated
- * every time a CartItem is added.
+ * as a {@link CartItem}. The pre-tax total is calculated
+ * every time a {@link CartItem} is added.
  *
+ *@version 0.1.0
  */
 public class Cart {
 
@@ -24,13 +25,20 @@ public class Cart {
 	
 	private boolean isEmpty = true;
 	private List<CartItem> cartItems = new ArrayList<CartItem>();
-	private BigDecimal preTaxTotal = new BigDecimal("0.00");
-	private Map<Item, Integer> itemsOnSpecial = new HashMap<Item, Integer>();
 	
-	// Items on special that are Charge By Weight(CBW)
+	/** recalculated whenever a CartItem is added or removed */
+	private BigDecimal preTaxTotal = new BigDecimal("0.00");
+	
+	/** 
+	 * Item Maps that store quantity of a type of item on special. This is used
+	 * for calculating the total discount of an order.
+	 * <p>itemsOnSpecialCBW refers to specials on items that are 
+	 * charge by weight (CBW)
+	 */
+	private Map<Item, Integer> itemsOnSpecial = new HashMap<Item, Integer>();
 	private Map<Item, Double> itemsOnSpecialCBW = new HashMap<Item, Double>();
 
-	// Default Constructor
+	/** Default Constructor */
 	public Cart() {}
 	
 	
@@ -60,6 +68,13 @@ public class Cart {
 		return preTaxTotal.toString() ;
 	}
 	
+	/**
+	 * Returns the last index of given {@link CartItem} from
+	 * cartItems list. 
+	 * 
+	 * @param cartItem CartItem to get last index of.
+	 * @return index of CartItem.
+	 */
 	public CartItem getCartItem(CartItem cartItem) {
 		int index = cartItems.lastIndexOf(cartItem);
 		return cartItems.get(index);
@@ -69,12 +84,15 @@ public class Cart {
 	/* Methods */
 	
 	/**
-	 * Adds CartItem to the cart and if the CartItem
-	 * contains an Item that is on special, will add
-	 * the item to itemsOnSpecial to track the number
-	 * of items of that type.
-	 * @param cartItem is an item added to the cart containing
-	 * a reference to the Item.
+	 * Adds {@link CartItem} to the cart. If this CartItem
+	 * contains an {@link Item} that has a {@link Special}, will add
+	 * the item to itemsOnSpecial map to track the number
+	 * of items of that special type.
+	 * <p> Should the Item be a charge by weight type, it is added
+	 * to itemsOnSpecialCBW map to track total weight per item
+	 * type on special.
+	 *
+	 * @param cartItem {@link CartItem} item to add to the cart.
 	 */
 	public void addCartItem(CartItem cartItem) {
 		cartItems.add(cartItem);
@@ -108,6 +126,11 @@ public class Cart {
 		}
 	}
 
+	/** 
+	 * Delete's the last scanned CartItem from the cart. It also
+	 * removes the quantity or weight from the respective items on
+	 * special map.
+	 */
 	public void deleteLastCartItem() {
 		int indexOfLast = cartItems.size() - 1;
 		CartItem cartItem = cartItems.get(indexOfLast);
@@ -126,6 +149,14 @@ public class Cart {
 		cartItems.remove(indexOfLast);
 	}
 	
+	/**
+	 * Iterates through the cartItems until it finds
+	 * a cartItem matching the itemName.
+	 * <p>It also removes the quantity or weight from the respective items on
+	 * special map.</P>
+	 * 
+	 * @param itemName item name to look for.
+	 */
 	public void deleteCartItem(String itemName) {
 		CartItem cartItem = null;
 		Item item = null;
@@ -159,8 +190,8 @@ public class Cart {
 	/**
 	 * Iterate through the cartItems and total up the pre-tax total.
 	 * The preTaxTotal is reset to zero each time this method is run
-	 * so that if an item or items are deleted, the correct amount can
-	 * be calculated.
+	 * so that if any items are deleted, the correct amount can
+	 * be recalculated.
 	 * <p> If there are any specials, the total discount amount is subtracted
 	 * from the pre-tax total.
 	 * </p>
@@ -172,14 +203,23 @@ public class Cart {
 			preTaxTotal = preTaxTotal.add(cartItem.getSellPrice());
 		}
 		
-		/* Go through specials and manually adjust price accordingly
+		/* Go through specials and adjust price accordingly
 		 * This way, if an item or items are removed to the point
 		 * that the special no longer applies, it will recalculate
-		 * accordingly.
+		 * without applying the special.
 		 */
 		this.adjustForSpecials();
 	}
 
+	/**
+	 * Returns the quantity of given {@link Item} that has a special.
+	 * The item is the key in the map and the value is the number of items
+	 * of that type.
+	 * 
+	 * @param item Item to search for.
+	 * @return int representing the quantity of given Item.
+	 * @exception e If an item cannot be found in the map.
+	 */
 	public int countItemOnSpecial(Item item) {
 		
 		int qtyItemOnSpecial = 0;
@@ -196,11 +236,11 @@ public class Cart {
 
 
 	/**
-	 * Adjusts for any items that are on special, including any limits that
-	 * may be applied.
+	 * Adjusts for any items that have a {@link Special}. <em>This includes any limits that
+	 * may be applied to the Special</em>.
 	 */
 	public void adjustForSpecials() {
-		// Local Variables
+	
 		BigDecimal specialDiscountAmount = new BigDecimal(0.0);
 		
 		/* Get List of Specials to iterate through, log if
