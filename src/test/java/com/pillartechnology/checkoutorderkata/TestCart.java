@@ -133,8 +133,6 @@ public class TestCart {
 	public void shouldReturnCorrectPreTaxTotalIfACartItemIsChargeByWeight() {
 		Item item4 = new Item("Steak", "3.00", true);
 		
-		/* TODO Application should prompt for weight if(isChargeByWeight)*/
-		
 		CartItem cartItem4 = new CartItem(item4, 5.00);
 		
 		cart.addCartItem(cartItem4);

@@ -21,7 +21,6 @@ public class TestCartItem {
 		cartItem1 = new CartItem(item1);		
 	}
 	
-	/* TESTS */
 	
 	@Test
 	public void shouldReturnCartItemDefaultPrice() {
