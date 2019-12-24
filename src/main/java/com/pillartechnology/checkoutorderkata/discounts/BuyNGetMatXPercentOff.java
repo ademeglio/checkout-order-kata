@@ -5,12 +5,27 @@ import java.math.RoundingMode;
 import com.pillartechnology.checkoutorderkata.entity.Item;
 
 /**
- * BuyNGetMatXPercentOff extends Special() allowing to configure
+ * BuyNGetMatXPercentOff extends {@link Special), allowing to configure
  * Buy N items and get M items at %x off.
+ * 
+ * @version 0.1.0
+ * @see Special
  */
 public class BuyNGetMatXPercentOff extends Special{
 
 	// Constructor
+	/**
+	 * Class Constructor specifying number of items required to
+	 * purchase, number of items to receive discount, and discount percentage
+	 * off.
+	 * 
+	 * @param buyQtyRequirement	minimum quantity of items needed in cart
+	 * 							before Special applies.
+	 * @param receiveQtyItems	number of items to receive at discounted rate.
+	 * @param percentOff		discount percentage entered as a whole number.
+	 * 							<strong>Example:</strong> 50% is entered as
+	 * 							50 or 50.0.
+	 */
 	public BuyNGetMatXPercentOff(int buyQtyRequirement,
 			int receiveQtyItems, double percentOff) {
 		super(buyQtyRequirement);
@@ -21,9 +36,11 @@ public class BuyNGetMatXPercentOff extends Special{
 	/**
 	 * Returns a BigDecimal representing the total calculated
 	 * discount for a given Item in the cart that is on special.
-	 * @param item an item object in the cart that has a special.
-	 * @param itemBuyCount is the number of items of type item in the cart on special.
-	 * @return The total calculated discount amount as a Big Decimal.
+	 * 
+	 * @param item 				an item object in the cart that has a special.
+	 * @param itemBuyCount 		is the number of items of type item in the cart on special.
+	 * @return					BigDecimal representing the total amount
+	 * 							to subtract from the current cart pre-tax total.
 	 */
 	@Override
 	public BigDecimal calculateDiscountAmount(Item item, int itemBuyCount) {
@@ -36,7 +53,6 @@ public class BuyNGetMatXPercentOff extends Special{
 			itemsRemaining = this.getLimit();
 		} 
 
-		// TODO double check that this shouldn't be >= instead of >
 		while (itemsRemaining > buyQtyRequirement) {
 			BigDecimal amountToAddToDiscount = new BigDecimal("0.0");
 			
@@ -66,9 +82,11 @@ public class BuyNGetMatXPercentOff extends Special{
 	 * on special. Total weight of all items is considered and 
 	 * each iteration removes the purchased amount at regular 
 	 * price and then the purchased amount at discounted price.
-	 * @param item The item the special is being applied to.
-	 * @param itemWeightCount The total weight of all same items.
-	 * @return
+	 * 
+	 * @param item 				The item the special is being applied to.
+	 * @param itemWeightCount 	The total weight of all same items.
+	 * @return					BigDecimal representing the total amount
+	 * 							to subtract from the current cart pre-tax total.
 	 */
 	@Override
 	public BigDecimal calculateDiscountAmountCBW(Item item, Double itemWeightCount) {

@@ -11,13 +11,26 @@ import com.pillartechnology.checkoutorderkata.entity.Item;
  * Buy N items for $x dollars.
  *
  *@version 0.1.0
- *@see 
+ *@see Special
  */
 public class BuyNForX extends Special{
 
+	/**
+	 * Stores the discounted price for a group of
+	 * CartItems.
+	 */
 	private BigDecimal itemsDiscountedPrice;
 
 	// Constructor
+	/**
+	 * Class Constructor specifying number of items required to 
+	 * purchase and the price the group is for.
+	 * 
+	 * @param buyQtyRequirement	minimum quantity of items needed in cart
+	 * 							before Special applies.
+	 * 
+	 * @param itemsPrice		price to return for group of items purchased.
+	 */
 	public BuyNForX(int buyQtyRequirement, String itemsPrice) {
 		super(buyQtyRequirement);
 		this.itemsDiscountedPrice = new BigDecimal(itemsPrice);
@@ -26,9 +39,11 @@ public class BuyNForX extends Special{
 	/**
 	 * Returns a BigDecimal representing the total calculated
 	 * discount for a given Item in the cart that is on special.
-	 * @param item an item object in the cart that has a special.
-	 * @param itemBuyCount is the number of items of type item in the cart on special.
-	 * @return The total calculated decimal amount as a Big Decimal.
+	 * 
+	 * @param item 			an {@link Item} to calculate discount for.
+	 * @param itemBuyCount 	is the number of same items being purchased used for
+	 * 						calculating number of items to receive discount.
+	 * @return 				The total calculated decimal amount as a Big Decimal.
 	 */
 	@Override
 	public BigDecimal calculateDiscountAmount(Item item, int itemBuyCount) {

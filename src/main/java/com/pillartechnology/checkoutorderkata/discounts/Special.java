@@ -10,7 +10,7 @@ import com.pillartechnology.checkoutorderkata.entity.Item;
  *
  *@version 0.1.0
  *@see BuyNForX
- *@see 
+ *@see BuyNGetMatXPercentOff
  */
 public abstract class Special {
 	
@@ -53,8 +53,8 @@ public abstract class Special {
 	/**
 	 * Class Constructor
 	 * 
-	 * @param buyQtyRequirement minimum quantity of items needed in cart
-	 * before Special applies.
+	 * @param buyQtyRequirement	minimum quantity of items needed in cart
+	 * 							before Special applies.
 	 */
 	public Special(int buyQtyRequirement) {
 		this.buyQtyRequirement = buyQtyRequirement;

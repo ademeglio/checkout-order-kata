@@ -13,10 +13,16 @@ import com.pillartechnology.checkoutorderkata.discounts.Markdown;
 import com.pillartechnology.checkoutorderkata.discounts.Special;
 import com.pillartechnology.checkoutorderkata.entity.Item;
 
+/**
+ * Implementation of {@link RegisterAdminService}.
+ * 
+ * @version 0.1.0
+ */
 @Service
 public class RegisterAdminServiceImpl implements RegisterAdminService {
 
 	private static final Logger logger = LoggerFactory.getLogger(RegisterAdminServiceImpl.class);
+	
 	
 	@Override
 	public void createItem(String itemName, String itemPrice, boolean isChargeByWeight) {

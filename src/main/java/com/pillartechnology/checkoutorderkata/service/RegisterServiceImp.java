@@ -10,13 +10,26 @@ import com.pillartechnology.checkoutorderkata.entity.Cart;
 import com.pillartechnology.checkoutorderkata.entity.CartItem;
 import com.pillartechnology.checkoutorderkata.entity.Item;
 
+/**
+ * Implementation of Register Service.
+ * 
+ * @version 0.1.0
+ * @see RegisterService
+ */
 @Service
 public class RegisterServiceImp implements RegisterService {
 
 	private static final Logger logger = LoggerFactory.getLogger(RegisterServiceImp.class);
 	
+	/** unique cart identification */
 	private Integer cartIdNo = 0;
 	
+	/** 
+	 * Initiation of cart or order. Once initiated
+	 * the <code>addCart</code> method will reference
+	 * <code>cartIdNo</code> and increment to the
+	 * next cartIdNo.  
+	 */
 	@Override
 	public void initiateCart() {
 		Cart cart = new Cart();
@@ -44,6 +57,20 @@ public class RegisterServiceImp implements RegisterService {
 		return cart.getPreTaxTotal();
 	}
 
+	/**
+	 * Scan adds {@link CartItem} to specified cart. Uses <code>cartIdNo</code> as
+	 * a key for <code>CARTS</code>; <code>itemName</code> as a key for the <code>
+	 * INVENTORY</code>; and if the item <code>isChargeByWeight</code> is 
+	 * <code>true</code> passes the weight for {@link CartItem} initiation.
+	 * <p>Each time this method is run, the cart's pre-tax total is recalculated.</p>
+	 * 
+	 * @param cartIdNo			integer representing the unique cart identifier.
+	 * @param itemName			name of the item to search for.
+	 * @param weight			weight of the item, if applicable.
+	 * @see						Item
+	 * @see						CartItem
+	 * @see						Cart
+	 */
 	@Override
 	public void scanItem(Integer cartIdNo, String itemName, double weight) {
 		Cart cart = this.getCart(cartIdNo);
@@ -76,6 +103,12 @@ public class RegisterServiceImp implements RegisterService {
 		
 	}
 	
+	/**
+	 * Removes the last scanned {@link CartItem} from the specified cart.
+	 * <p>Each time this method is run, the cart's pre-tax total is recalculated.</p>
+	 * 
+	 * @param cartIdNo			integer representing the unique cart identifier.
+	 */
 	@Override
 	public void removeLastItemScanned(Integer cartIdNo) {
 		Cart cart = this.getCart(cartIdNo);
@@ -84,6 +117,16 @@ public class RegisterServiceImp implements RegisterService {
 		cart.calculatePreTaxTotal();
 	}
 	
+	/**
+	 * Removes a scanned {@link CartItem} from the specified {@link Cart} by searching
+	 * through the cart for a CartItem using the same scanned<itemName>.
+	 * <p>Each time this method is run, the cart's pre-tax total is recalculated.</p>
+	 * 
+	 * @param cartIdNo			integer representing the unique cart identifier.
+	 * @param itemName			name of the item to search for.
+	 * @see						CartItem
+	 * @see						Cart
+	 */
 	@Override
 	public void removeScannedItem(Integer cartIdNo, String itemName) {
 		Cart cart = this.getCart(cartIdNo);
