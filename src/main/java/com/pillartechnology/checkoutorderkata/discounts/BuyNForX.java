@@ -88,7 +88,9 @@ public class BuyNForX extends Special{
 	
 	@Override
 	public BigDecimal calculateDiscountAmountCBW(Item item, Double itemWeightCount) {
-		// TODO Auto-generated method stub
+		/* Not applicable for this but implemented because
+		 * it is part of Special.java
+		 */
 		return null;
 	}
 	
