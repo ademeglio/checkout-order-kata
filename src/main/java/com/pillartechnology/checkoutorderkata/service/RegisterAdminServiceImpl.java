@@ -167,6 +167,13 @@ public class RegisterAdminServiceImpl implements RegisterAdminService {
 		}
 	}
 
+	@Override
+	public void addLimitToSpecial(String specialName, int limitQty) {
+		Special special = this.getSpecial(specialName);
+		
+		special.setLimit(limitQty);
+	}
+
 	
 
 } // End RegisterAdminServiceImpl()

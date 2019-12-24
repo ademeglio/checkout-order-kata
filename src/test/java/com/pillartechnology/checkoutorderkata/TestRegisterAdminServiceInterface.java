@@ -112,4 +112,15 @@ public class TestRegisterAdminServiceInterface {
 		
 		assertEquals("2 For $5.00", item.getSpecial().getName());
 	}
+	
+	@Test
+	public void shouldUpdateLimitWhenAssignedToSpecial() {
+		registerAdminService.createSpecialBuyNForX("2 For $5.00", 2, "5.00");
+		
+		registerAdminService.addLimitToSpecial("2 for $5.00", 2);
+		
+		Special specialTest = registerAdminService.getSpecial("2 for $5.00");
+		
+		assertEquals(2, specialTest.getLimit());
+	}
 } //EndTestAdminRegisterInterface

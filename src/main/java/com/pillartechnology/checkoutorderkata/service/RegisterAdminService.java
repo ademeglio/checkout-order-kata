@@ -140,7 +140,16 @@ public interface RegisterAdminService {
 	 */
 	void updateItem(String itemName, String newDefaultPrice, String markdownDescription
 			, String specialName);
-	
-	//@TODO Assign limits! Update Special!
+
+	/**
+	 * Adds a limit to {@limit Special} using the <code>specialName</code>
+	 * to search for the special and uses <code>limitQty</code> to assign
+	 * the limit quantity.
+	 * 
+	 * @param specialName			name of special to search for.
+	 * @param limitQty				amount to set limit to
+	 */
+	void addLimitToSpecial(String specialName, int limitQty);
+
 
 } // End RegisterAdminService()
