@@ -13,7 +13,7 @@ import com.pillartechnology.checkoutorderkata.service.RegisterAdminService;
 import com.pillartechnology.checkoutorderkata.service.RegisterService;
 
 @SpringBootTest
-public class TestRegisterService {
+public class TestRegisterServiceInterface {
 
 	private RegisterService registerService;
 	private RegisterAdminService registerAdminService;
@@ -93,4 +93,4 @@ public class TestRegisterService {
 		
 		assertEquals("4.50", registerService.getPreTaxCartTotal(0).toString());
 	}
-} // End TestRegisterService()
+} // End TestRegisterServiceInterface()
