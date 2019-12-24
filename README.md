@@ -4,9 +4,18 @@
 
 Hello and thank you for reviewing my kata exercise.
 
-I have used Gradle to configure running the tests. [Reference](https://docs.gradle.org/current/userguide/java_testing.html)
+I have used Gradle to compile running tests and the application. [Reference](https://docs.gradle.org/current/userguide/java_testing.html)  
+I'm guessing you know the dril, just in case...
+### Reviewing Tests
+1. Please go into the application folder.
+2. Type the following in the command line `./gradlew test`.
+3. After the tests complete, you will be given a link to a published build scan. You will need to go to the link and enter
+an email address in order to activate the scan. The scan takes minimal time to populate once you activate it and Gradle will
+send you an email when it is ready.
 
-_TODO ADD INSTRUCTIONS BEFORE SENDING IN FOR REVIEW_
+Alternatively, you can go into the `project/build/tests/test/index.html` and see a Gradle created report.
+
+There are two main API classes that a, _cash register_ for example could access. These are located in the services sub package.
 
 ## Requirements
 

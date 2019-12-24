@@ -2,16 +2,65 @@ plugins {
 	id 'org.springframework.boot' version '2.2.2.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
+	id 'org.ajoberstar.grgit' version '3.1.1' apply false
 }
 
 apply plugin: 'java'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'eclipse'
 
-group = 'com.pillartechnology'
-version = '0.0.1-SNAPSHOT'
+
+/***********************************************************************************************
+ * Grgit to read .git file and pull commit information
+ * Used to reference commit head data. I had trouble using Gradle Project Properties to pull
+ * data I needed in time for the processResources task.
+ * http://ajoberstar.org/grgit/index.html & https://github.com/ajoberstar/grgit
+ ***********************************************************************************************/
+import org.ajoberstar.grgit.Grgit
+
+def git = Grgit.open(dir: file('.'))
+ext {
+	gitAbbreviatedId = git.head().abbreviatedId.toString().toUpperCase()
+}
+
+
+/*********************************************************************************************** 
+ * Gradle Project Properties
+ * https://docs.gradle.org/current/dsl/org.gradle.api.Project
+ ***********************************************************************************************/
+project.group = 'com.pillartechnology'
+project.description = 'Coding Kata for Pillar Technology'
+project.version = '0.0.1-SNAPSHOT' + " " + gitAbbreviatedId.toString().toUpperCase()
+
+// Java plugin jar properties
 sourceCompatibility = '11'
 
+
+// Spring bootJar Properties
+bootJar {
+	archiveFileName = "checkout-order-kata.jar"
+	archiveVersion = project.version
+	mainClassName = 'com.pillartechnology.checkoutorderkata.CheckoutOrderKataApplication.java'
+	launchScript()
+}
+
+// Spring Boot Plugin Properties
+springBoot {
+	mainClassName = 'com.pillartechnology.checkoutorderkata.CheckoutOrderKataApplication.java'
+	
+	// Generate build information for Spring Boot Actuator's info endpoint.
+	buildInfo {
+	    properties {
+	        artifact = 'checkout'
+	        version = project.version
+	        group = project.group
+	        name = 'Checkout Order Kata'
+	        time = null
+	    }
+	}
+}
+
+	
 configurations {
 	developmentOnly
 	runtimeClasspath {
